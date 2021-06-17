@@ -2,8 +2,14 @@
 
 Starter course for assessing GitHub Classroom use.
 
-- introduce learners to using GitHub classroom assignments
+The goal of this course is to introduce learners to using GiHub Classroom assignments and to assess that learners have the necessary skillset to complete a classroom assignment.
 
+At the end of this course, learners will be able to:
+
+1. describe what a GitHub Classroom assignment is and accept a GitHub Classroom assignment
+1. use git to complete an assignment objective
+1. use GitHub features to request feedback
+1. edit Markdown files to include simple formatting
 
 ---
 
