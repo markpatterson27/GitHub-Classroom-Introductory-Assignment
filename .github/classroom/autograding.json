@@ -1,0 +1,14 @@
+{
+  "tests": [
+    {
+      "name": "Activity 1 - Accept assignment",
+      "setup": "",
+      "run": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5
+    }
+  ]
+}
