@@ -24,10 +24,21 @@ steps
 - if first time, choose name from roster - this makes it easier for your lecturer to identify you
 - refresh page and click link to repo
 
+<details>
+  <summary>Accepting Classroom assignment steps</summary>
 
-### Activities
+  [#TODO: steps, or add external link]
 
-- accept assignment
+  1. click link
+  1. select name from roster
+  1. wait for assignment to copy to new repositiory
+  1. refresh page
+  1. follow link to new assignment repository
+</details>
+
+| <img align="right" width="24" height="24" src="checkbox-ticked-solid.svg" /> :clipboard: Activity - Accept assignment |
+|:---|
+| <p>Chances are, if you are reading this, you have already accepted the assignment and have completed the task. Well done.</p><p>If you haven't accepted the assignment yet and are reading this from a central site, ask your lecturer or teacher for the link to the assignment, then follow the steps to accepting a classroom assignment.</p><details><summary>Accepting Classroom assignment steps</summary>[#TODO: steps, or add external link]</details> |
 
 ---
 
@@ -43,9 +54,9 @@ In order to complete classroom assignments, you will need to be able to use git 
 
 - if not familar with GitHub, please do GH Learn course:
 
-### Activities
-
-- make commit to assignment repo
+| :clipboard: Activity - Make commit |
+|:---|
+| - make commit to assignment repo |
 
 ---
 
@@ -56,9 +67,9 @@ In order to complete classroom assignments, you will need to be able to use git 
   - Lecturer might setup assignment with Feedback PR
   - use this to ask Lecturer for feedback on assignment
 
-### Activities
-
-- comment on Feddback PR
+| :clipboard: Activity - Comment on Feedback PR |
+|:---|
+| - comment on Feedback PR |
 
 ---
 
@@ -68,14 +79,17 @@ In order to complete classroom assignments, you will need to be able to use git 
 - supported by GitHub
 - useful for READMEs
 
-
-### Activities
-
-- create file and add markdown
+| :clipboard: Activity - Edit markdown file |
+|:---|
+| - create file and add markdown |
 
 ---
 
 ## Assessment
 
+| :clipboard: Activity - Review quiz |
+|:---|
+| - create file and add markdown |
+
 - review quiz
-  - edit quiz file with answers
+- edit quiz file with answers
