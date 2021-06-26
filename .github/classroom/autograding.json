@@ -3,7 +3,7 @@
     {
       "name": "Activity 1 - Accept assignment",
       "setup": "",
-      "run": "",
+      "run": "[ -e .github/results/activity1.txt ] && exit 0 || exit 1",
       "input": "",
       "output": "",
       "comparison": "included",
