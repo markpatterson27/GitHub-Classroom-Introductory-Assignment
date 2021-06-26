@@ -46,9 +46,12 @@ jobs:
               fs.writeFile('.github/results/activity1.txt', 'pass', function (err) {
                 if (err) return console.log(err);
               });
+
+              return 'success'
             }
             else {
               console.log("no match to repo suffix")
+              return 'fail'
             }
 
       - run: ls .github/results
@@ -69,3 +72,4 @@ jobs:
 
     outputs:
       grading-score: ${{ steps.autograder.outputs.Points }}
+      activity1-result: ${{ steps.activity1.outputs.result }}
