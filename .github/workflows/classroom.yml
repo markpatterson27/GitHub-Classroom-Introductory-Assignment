@@ -51,6 +51,8 @@ jobs:
               console.log("no match to repo suffix")
             }
 
+      - run: ls .github/results
+
       # run grading
       # add id to step so outputs can be referenced
       - uses: education/autograding@v1
