@@ -19,6 +19,38 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      # test activity 1
+      - uses: actions/github-script@v4
+        name: "Check Activity 1"
+        id: activity1
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            // get repo name
+            const repoName = context.repo.repo.toLowerCase()
+
+            // get repo members
+            const res = await github.repos.listCollaborators({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            let collaborators = res.data
+            console.log(collaborators)
+
+            // check if one of collab list matches repository name suffix. make case insensitive.
+            if (collaborators.some(collaborator=>repoName.endsWith(collaborator.login.toLowerCase()))) {
+              console.log("found collaborator match to repo suffix")
+
+              // write result to file
+              const fs = require('fs');
+              fs.writeFile('.github/results/activity1.txt', 'pass', function (err) {
+                if (err) return console.log(err);
+              });
+            }
+            else {
+              console.log("no match to repo suffix")
+            }
+
       # run grading
       # add id to step so outputs can be referenced
       - uses: education/autograding@v1
