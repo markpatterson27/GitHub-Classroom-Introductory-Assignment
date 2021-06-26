@@ -58,3 +58,14 @@ jobs:
       - uses: education/autograding@v1
         name: "** Grading and Feedback **"
         id: autograder
+        continue-on-error: true
+
+      # fail job if autograder returns failed
+      # outcome can be 'success', 'failure', 'cancelled', or 'skipped'
+      # trigger fail either on !success or on failure depending on preference
+      - name: check autograder pass fail
+        if: ${{ steps.autograder.outcome != 'success' }}
+        run: exit 1
+
+    outputs:
+      grading-score: ${{ steps.autograder.outputs.Points }}
