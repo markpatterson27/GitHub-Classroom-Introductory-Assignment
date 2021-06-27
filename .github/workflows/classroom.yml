@@ -4,7 +4,7 @@ on:
   push:
     branches:
     - '*'
-    - '!badges'
+    - '!status'
     - '!feedback'
 
   # Allows you to run this workflow manually from the Actions tab
@@ -108,3 +108,55 @@ jobs:
       grading-score: ${{ steps.autograder.outputs.Points }}
       activity1-result: ${{ steps.activity1.outputs.result }}
       activity2-result: ${{ steps.activity2.outputs.result }}
+
+  # job to build activity status icons
+  build-activity-icons:
+    name: Build Activity Icons
+    runs-on: ubuntu-latest
+    if: always()
+    needs: build
+    steps:
+      # need to checkout whole repo
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # switch to status branch
+      - run: git checkout status || git checkout -b status
+
+      # make dir for activity status icons
+      - name: make icons dir
+        run: mkdir -p .github/activity-icons
+
+      # make/copy activity 1 icon
+      - name: activity 1 icon
+        run: |
+          echo ${{ needs.build.outputs.activity1-result }}
+          if ${{ needs.build.outputs.activity1-result == 'success' }}; then
+            cp .github/templates/activity-completed.svg .github/activity-icons/activity1.svg
+          else
+            cp .github/templates/activity-incomplete.svg .github/activity-icons/activity1.svg
+          fi
+
+      # make/copy activity 2 icon
+      - name: activity 2 icon
+        run: |
+          echo ${{ needs.build.outputs.activity2-result }}
+          if ${{ needs.build.outputs.activity2-result == 'success' }}; then
+            cp .github/templates/activity-completed.svg .github/activity-icons/activity2.svg
+          else
+            cp .github/templates/activity-incomplete.svg .github/activity-icons/activity2.svg
+          fi
+
+      # commit and push activity icons if statuses have changed
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add '.github/activity-icons'
+          git commit -m "Add/Update activity icons" || exit 0
+      - name: Push badge commit
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: status
