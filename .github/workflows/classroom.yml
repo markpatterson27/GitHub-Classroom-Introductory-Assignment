@@ -53,6 +53,40 @@ jobs:
               console.log("no match to repo suffix")
               return 'fail'
             }
+      
+      # test activity 2
+      - uses: actions/github-script@v4
+        name: "Check Activity 2"
+        id: activity2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            // get commits, filtered by actor
+            const res = await github.repos.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              author: context.actor,
+            });
+            let commitList = res.data
+            console.log(commitList)
+
+            // is commit list non-zero
+            if (Array.isArray(commitList) && commitList.length) {
+              console.log("commits found")
+
+              // write result to file
+              const fs = require('fs');
+              fs.writeFile('.github/results/activity2.txt', 'pass', function (err) {
+                if (err) return console.log(err);
+              });
+
+              return 'success'
+            }
+            else {
+              console.log(`no commits for ${context.actor} found`)
+              return 'fail'
+            }
+
 
       - run: ls .github/results
 
@@ -73,3 +107,4 @@ jobs:
     outputs:
       grading-score: ${{ steps.autograder.outputs.Points }}
       activity1-result: ${{ steps.activity1.outputs.result }}
+      activity2-result: ${{ steps.activity2.outputs.result }}
