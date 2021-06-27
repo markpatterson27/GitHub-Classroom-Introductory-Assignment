@@ -53,6 +53,7 @@ jobs:
               console.log("no match to repo suffix")
               return 'fail'
             }
+          result-encoding: string
       
       # test activity 2
       - uses: actions/github-script@v4
@@ -86,7 +87,7 @@ jobs:
               console.log(`no commits for ${context.actor} found`)
               return 'fail'
             }
-
+          result-encoding: string
 
       - run: ls .github/results
 
