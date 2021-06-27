@@ -9,6 +9,16 @@
       "comparison": "included",
       "timeout": 10,
       "points": 5
+    },
+    {
+      "name": "Activity 2 - Make commit",
+      "setup": "",
+      "run": "[ -e .github/results/activity2.txt ] && exit 0 || exit 1",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5
     }
   ]
 }
