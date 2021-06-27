@@ -56,7 +56,7 @@ In order to complete classroom assignments, you will need to be able to use git 
 
 | :clipboard: Activity - Make commit |
 |:---|
-| - make commit to assignment repo |
+| <p>Make a commit to this assignment repo.</p><p>Edit the [`editme.md`](../../edit/main/editme.md) file and add a question for your lecturer / teacher. When you have finished editing the file, save the changes and commit them to this repository.</p><p>You can either use the editing tools on GitHub to do this, or clone this repository to your local computer, make the changes, commit them and push the commit back to GitHub.</p> |
 
 ---
 
