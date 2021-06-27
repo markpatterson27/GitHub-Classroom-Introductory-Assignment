@@ -36,7 +36,7 @@ steps
   1. follow link to new assignment repository
 </details>
 
-| <img align="right" width="24" height="24" src="checkbox-ticked-solid.svg" /> :clipboard: Activity - Accept assignment |
+| <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/activity1.svg" /> :clipboard: Activity - Accept assignment |
 |:---|
 | <p>Chances are, if you are reading this, you have already accepted the assignment and have completed the task. Well done.</p><p>If you haven't accepted the assignment yet and are reading this from a central site, ask your lecturer or teacher for the link to the assignment, then follow the steps to accepting a classroom assignment.</p><details><summary>Accepting Classroom assignment steps</summary>[#TODO: steps, or add external link]</details> |
 
@@ -54,7 +54,7 @@ In order to complete classroom assignments, you will need to be able to use git 
 
 - if not familar with GitHub, please do GH Learn course:
 
-| :clipboard: Activity - Make commit |
+| <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/activity2.svg" /> :clipboard: Activity - Make commit |
 |:---|
 | <p>Make a commit to this assignment repo.</p><p>Edit the [`editme.md`](../../edit/main/editme.md) file and add a question for your lecturer / teacher. When you have finished editing the file, save the changes and commit them to this repository.</p><p>You can either use the editing tools on GitHub to do this, or clone this repository to your local computer, make the changes, commit them and push the commit back to GitHub.</p> |
 
