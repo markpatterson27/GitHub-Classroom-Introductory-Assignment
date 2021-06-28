@@ -12,10 +12,10 @@ if [ ! -e quiz.md ]; then
   exit 1
 fi
 
-IFS_backup=$IFS
-IFS=$'\n'
-answers=($(grep -e "^Answer:" quiz.md | cut -d ':' -f 2 | tr -d "[:blank:]"))
-IFS=$IFS_backup
+# IFS_backup=$IFS
+# IFS=$'\n'
+answers=($(grep -e "^Answer:" quiz.md | cut -d ':' -f 2 | tr -d "[:blank:]" | sed 's/.*/"&"/'))
+# IFS=$IFS_backup
 # echo ${#answers[@]}
 
 if [[ ${#answers[@]} != 5 ]]; then
@@ -26,7 +26,7 @@ fi
 status=0
 score=0
 if [ $1 ]; then
-  if [[ ${answers[$1 - 1]} == "${expected[$1 - 1]}"* ]]; then
+  if [[ $(echo ${answers[$1 - 1]} | xargs) == "${expected[$1 - 1]}"* ]]; then
     echo "Question $1 answered correctly."
     echo "pass"
   else
@@ -35,7 +35,7 @@ if [ $1 ]; then
   fi
 else
   for i in "${!expected[@]}"; do
-    if [[ ${answers[$i]} == "${expected[$i]}"* ]]; then
+    if [[ $(echo ${answers[$i]} | xargs) == "${expected[$i]}"* ]]; then
       echo "Question $(( $i+1 )) answered correctly."
       ((score+=1))
     else

@@ -284,7 +284,7 @@ jobs:
             cp .github/templates/quiz5.svg .github/activity-icons/quiz.svg
           else
             cp .github/templates/quiz.svg .github/activity-icons/quiz.svg
-            sed -i "s/><\/text>/>${score}<//text>" .github/activity-icons/quiz.svg
+            sed -i "s/><\/text>/>${score}<\/text>/" .github/activity-icons/quiz.svg
           fi
 
       # commit and push activity icons if statuses have changed
