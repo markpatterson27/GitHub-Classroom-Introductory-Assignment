@@ -67,9 +67,9 @@ In order to complete classroom assignments, you will need to be able to use git 
   - Lecturer might setup assignment with Feedback PR
   - use this to ask Lecturer for feedback on assignment
 
-| :clipboard: Activity - Comment on Feedback PR |
+| <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/activity3.svg" /> :clipboard: Activity - Comment on Feedback PR |
 |:---|
-| - comment on Feedback PR |
+| Go to the [Feedback pull request](../../pull/1). At the bottom of the page you will find a comment form. Leave a comment asking your lecturer / teacher to review your previous commit. |
 
 ---
 

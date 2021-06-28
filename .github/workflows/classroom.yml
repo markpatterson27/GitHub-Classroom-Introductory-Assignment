@@ -10,11 +10,15 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+  issue_comment:
+    types: [created]
+
 jobs:
   # job to run autograding
   build:
     name: Autograding
     runs-on: ubuntu-latest
+    needs: find-feedback-pr
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v2
@@ -89,6 +93,42 @@ jobs:
             }
           result-encoding: string
 
+      # test activity 3
+      - uses: actions/github-script@v4
+        name: "Check Activity 3"
+        id: activity3
+        env:
+          ISSUE: ${{ needs.find-feedback-pr.outputs.feedback-pr }}
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            // get comments on Feedback PR
+            const res = await github.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: process.env.ISSUE,
+            });
+            let commentList = res.data
+            console.log(commentList)
+
+            // is comment list non-zero AND does actor equal one of comment authors
+            if (Array.isArray(commentList) && commentList.length && commentList.some(comment => comment.user.login == context.actor)) {
+              console.log("comments found")
+
+              // write result to file
+              const fs = require('fs');
+              fs.writeFile('.github/results/activity3.txt', 'pass', function (err) {
+                if (err) return console.log(err);
+              });
+
+              return 'success'
+            }
+            else {
+              console.log(`no comments for ${context.author} found`)
+              return 'fail'
+            }
+          result-encoding: string
+
       - run: ls .github/results
 
       # run grading
@@ -109,6 +149,7 @@ jobs:
       grading-score: ${{ steps.autograder.outputs.Points }}
       activity1-result: ${{ steps.activity1.outputs.result }}
       activity2-result: ${{ steps.activity2.outputs.result }}
+      activity3-result: ${{ steps.activity3.outputs.result }}
 
   # job to find Feedback PR issue number. If created by Classroom, should be issue 1.
   find-feedback-pr:
@@ -216,6 +257,16 @@ jobs:
             cp .github/templates/activity-completed.svg .github/activity-icons/activity2.svg
           else
             cp .github/templates/activity-incomplete.svg .github/activity-icons/activity2.svg
+          fi
+
+      # make/copy activity 3 icon
+      - name: activity 3 icon
+        run: |
+          echo ${{ needs.build.outputs.activity3-result }}
+          if ${{ needs.build.outputs.activity3-result == 'success' }}; then
+            cp .github/templates/activity-completed.svg .github/activity-icons/activity3.svg
+          else
+            cp .github/templates/activity-incomplete.svg .github/activity-icons/activity3.svg
           fi
 
       # commit and push activity icons if statuses have changed
