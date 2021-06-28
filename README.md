@@ -87,9 +87,9 @@ In order to complete classroom assignments, you will need to be able to use git 
 
 ## Assessment
 
-| :clipboard: Activity - Review quiz |
-|:---|
-| - create file and add markdown |
-
 - review quiz
 - edit quiz file with answers
+
+| <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/quiz.svg" /> :clipboard: Activity - Review quiz |
+|:---|
+| Edit the [`quiz.md`](../../edit/main/quiz.md) file and add your answers to the file where indicated. |
