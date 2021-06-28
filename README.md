@@ -15,30 +15,35 @@ At the end of this course, learners will be able to:
 
 ## Classroom Assignments
 
-assignments can be graded
-    have tools for feedback
-    be able to comment on code easier
+GitHub Classroom is a tool that helps your lecturer / teacher orangize and manage GitHub repositories that are used for class exercises and assessments. GitHub Classroom automates repository creation and access control, making it easy to distribute starter code and collect assignments on GitHub.
 
-steps
-- accept assignment
-- if first time, choose name from roster - this makes it easier for your lecturer to identify you
-- refresh page and click link to repo
+A GitHub Classroom assignment is a GitHub repository with access control setup so both you and your leacturer / teacher can access it. When you accept an assignment, GitHub Classroom will automatically create a new repository for you. The assignment repository will belong to your course's organization account on GitHub, but you and your lecturer / teacher will have access to it.
+
+Assignments can make use of GitHub features to:
+
+- grade your work
+- provide a mechanism to get feedback from your lecturer / teacher
+- make commenting on code easier
+- set a deadline for completion
+
+Once an assignment has been accepted, students no longer interact with GitHub classroom. They just interact with GitHub.
 
 <details>
-  <summary>Accepting Classroom assignment steps</summary>
+  <summary id="assignment-steps">Accepting Classroom assignment steps</summary>
 
   [#TODO: steps, or add external link]
 
   1. click link
-  1. select name from roster
+  1. if first time, select name from roster - this makes it easier for your lecturer to identify you
   1. wait for assignment to copy to new repositiory
   1. refresh page
   1. follow link to new assignment repository
+
 </details>
 
 | <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/activity1.svg" /> :clipboard: Activity - Accept assignment |
 |:---|
-| <p>Chances are, if you are reading this, you have already accepted the assignment and have completed the task. Well done.</p><p>If you haven't accepted the assignment yet and are reading this from a central site, ask your lecturer or teacher for the link to the assignment, then follow the steps to accepting a classroom assignment.</p><details><summary>Accepting Classroom assignment steps</summary>[#TODO: steps, or add external link]</details> |
+| <p>Chances are, if you are reading this, you have already accepted the assignment and have completed the task. Well done.</p><p>If you haven't accepted the assignment yet and are reading this from a central site, ask your lecturer or teacher for the link to the assignment, then follow the [steps](#assignment-steps) to accepting a classroom assignment. |
 
 ---
 
