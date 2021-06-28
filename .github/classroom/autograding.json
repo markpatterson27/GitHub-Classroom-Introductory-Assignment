@@ -29,6 +29,56 @@
       "comparison": "included",
       "timeout": 10,
       "points": 5
+    },
+    {
+      "name": "Quiz - Question 1",
+      "setup": "",
+      "run": "/bin/bash .github/grading-scripts/quiz.sh 1",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Quiz - Question 2",
+      "setup": "",
+      "run": "/bin/bash .github/grading-scripts/quiz.sh 2",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Quiz - Question 3",
+      "setup": "",
+      "run": "/bin/bash .github/grading-scripts/quiz.sh 3",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Quiz - Question 4",
+      "setup": "",
+      "run": "/bin/bash .github/grading-scripts/quiz.sh 4",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Quiz - Question 5",
+      "setup": "",
+      "run": "/bin/bash .github/grading-scripts/quiz.sh 5",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
     }
   ]
 }
