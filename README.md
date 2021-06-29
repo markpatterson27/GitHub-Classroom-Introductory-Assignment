@@ -53,11 +53,15 @@ In order to complete classroom assignments, you will need to be able to use git 
 
 ### git
 
-- if you are not familar with git, please do MS Learn course:
+Git is a software tool for tracking changes across a set of files. It helps programmers to undo changes that break their code and to work collaboratively with others when developing software.
+
+If you are already family with using git, continue on. If you are new to using git, please complete the MS Learn course: [Introduction to Git](https://docs.microsoft.com/en-us/learn/modules/intro-to-git/) before continuing.
 
 ### GitHub
 
-- if not familar with GitHub, please do GH Learn course:
+GitHub is a cloud based service for hosting Git repositories. It provides a website, command-line tools, and workflow that makes it easier for developers and users to work together.
+
+To learn more about GitHub and its features, please complete the MS Learn course: [Introduction to GitHub](https://docs.microsoft.com/en-us/learn/modules/introduction-to-github/).
 
 | <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/activity2.svg" /> :clipboard: Activity - Make commit |
 |:---|
