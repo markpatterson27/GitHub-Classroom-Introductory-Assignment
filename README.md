@@ -61,6 +61,8 @@ If you are already family with using git, continue on. If you are new to using g
 
 GitHub is a cloud based service for hosting Git repositories. It provides a website, command-line tools, and workflow that makes it easier for developers and users to work together.
 
+[Video: What is GitHub?](https://www.youtube.com/watch?v=w3jLJU7DT5E)
+
 To learn more about GitHub and its features, please complete the MS Learn course: [Introduction to GitHub](https://docs.microsoft.com/en-us/learn/modules/introduction-to-github/).
 
 | <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/activity2.svg" /> :clipboard: Activity - Make commit |
