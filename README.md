@@ -71,10 +71,11 @@ To learn more about GitHub and its features, please complete the MS Learn course
 
 ## Feedback Pull-Request
 
-- what are pull requests
-- feedback PR
-  - Lecturer might setup assignment with Feedback PR
-  - use this to ask Lecturer for feedback on assignment
+A pull request (PR) is a feature of GitHub and part of the GitHub flow. It provides a space and tools to review and discuss changes made on one branch before those changes are merged into another branch.
+
+[Video: Introduction to pull requests](https://youtu.be/kJr-PIfLDl4)
+
+Your lecturer / teacher might have setup a pull-request specifically for feedback. This PR will provide a place to see changes that you have made to the repo and a space for you to discuss with your lecturer / teacher the code that you have written.
 
 | <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/activity3.svg" /> :clipboard: Activity - Comment on Feedback PR |
 |:---|
