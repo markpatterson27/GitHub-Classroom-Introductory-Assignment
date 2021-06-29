@@ -85,11 +85,10 @@ Your lecturer / teacher might have setup a pull-request specifically for feedbac
 
 ---
 
-## Assessment
+## Knowledge Check
 
-- review quiz
-- edit quiz file with answers
+Complete the knowledge review quiz. There are five multiple choice questions on the topics covered in this course.
 
 | <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/quiz.svg" /> :clipboard: Activity - Review quiz |
 |:---|
-| Edit the [`quiz.md`](../../edit/main/quiz.md) file and add your answers to the file where indicated. |
+| Edit the [`quiz.md`](../../edit/main/quiz.md) file and add your answers to each question on the same line as and after where it says 'Answer: '. When you have finished answering the questions, save the file, commit the changes and push your commit back to GitHub. |
