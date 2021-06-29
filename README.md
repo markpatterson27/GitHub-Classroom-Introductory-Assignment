@@ -9,7 +9,6 @@ At the end of this course, learners will be able to:
 1. describe what a GitHub Classroom assignment is and accept a GitHub Classroom assignment
 1. use git to complete an assignment objective
 1. use GitHub features to request feedback
-1. edit Markdown files to include simple formatting
 
 ---
 
@@ -34,6 +33,7 @@ Once an assignment has been accepted, students no longer interact with GitHub cl
   [#TODO: steps, or add external link]
 
   1. click link
+  1. sign in or up for GH
   1. if first time, select name from roster - this makes it easier for your lecturer to identify you
   1. wait for assignment to copy to new repositiory
   1. refresh page
@@ -82,18 +82,6 @@ Your lecturer / teacher might have setup a pull-request specifically for feedbac
 | <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/activity3.svg" /> :clipboard: Activity - Comment on Feedback PR |
 |:---|
 | Go to the [Feedback pull request](../../pull/1). At the bottom of the page you will find a comment form. Leave a comment asking your lecturer / teacher to review your previous commit. |
-
----
-
-## Markdown
-
-- lightweight way to style text
-- supported by GitHub
-- useful for READMEs
-
-| :clipboard: Activity - Edit markdown file |
-|:---|
-| - create file and add markdown |
 
 ---
 
