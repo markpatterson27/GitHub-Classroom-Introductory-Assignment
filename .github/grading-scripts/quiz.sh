@@ -3,7 +3,7 @@
 # param
 # $1 - question number
 
-expected=(1 2 3 4 5)
+expected=(2 2 3 4 3)
 # echo ${#expected[@]}
 
 # check quiz file exists
