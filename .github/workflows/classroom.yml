@@ -155,7 +155,8 @@ jobs:
   find-feedback-pr:
     name: Find Feedback PR
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' && github.actor != 'github-classroom[bot]' }}
+    # if: ${{ github.ref == 'refs/heads/main' && github.actor != 'github-classroom[bot]' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     steps:
       # check if PR exists
       # if doesn't exist, create it
