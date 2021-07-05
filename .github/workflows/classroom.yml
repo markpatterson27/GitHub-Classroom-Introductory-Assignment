@@ -288,6 +288,13 @@ jobs:
             sed -i "s/><\/text>/>${score}<\/text>/" .github/activity-icons/quiz.svg
           fi
 
+      # create points bar
+      - name: points bar
+        uses: ./.github/actions/points-bar
+        with:
+          points: ${{ needs.build.outputs.grading-score }}
+          path: '.github/activity-icons/points-bar.svg'
+
       # commit and push activity icons if statuses have changed
       - name: Commit changes
         run: |

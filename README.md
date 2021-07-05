@@ -1,5 +1,7 @@
 # GitHub Classroom Starter Course
 
+<img align="right" height="36" src="../../blob/status/.github/activity-icons/points-bar.svg" />
+
 Starter course for assessing GitHub Classroom use.
 
 The goal of this course is to introduce learners to using GiHub Classroom assignments and to assess that learners have the necessary skillset to complete a classroom assignment.
