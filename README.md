@@ -1,6 +1,6 @@
 # GitHub Classroom Starter Course
 
-<img align="right" height="36" src="../../blob/status/.github/activity-icons/points-bar.svg" />
+<img alt="points bar" align="right" height="36" src="../../blob/status/.github/activity-icons/points-bar.svg" />
 
 Starter course for assessing GitHub Classroom use.
 
@@ -43,7 +43,7 @@ Once an assignment has been accepted, students no longer interact with GitHub cl
 
 </details>
 
-| <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/activity1.svg" /> :clipboard: Activity - Accept assignment |
+| <img alt="activity status" align="right" height="24" src="../../blob/status/.github/activity-icons/activity1.svg" /> :clipboard: Activity - Accept assignment |
 |:---|
 | <p>Chances are, if you are reading this, you have already accepted the assignment and have completed the task. Well done.</p><p>If you haven't accepted the assignment yet and are reading this from a central site, ask your lecturer or teacher for the link to the assignment, then follow the [steps](#assignment-steps) to accepting a classroom assignment. |
 
@@ -67,7 +67,7 @@ GitHub is a cloud based service for hosting Git repositories. It provides a webs
 
 To learn more about GitHub and its features, please complete the MS Learn course: [Introduction to GitHub](https://docs.microsoft.com/en-us/learn/modules/introduction-to-github/).
 
-| <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/activity2.svg" /> :clipboard: Activity - Make commit |
+| <img alt="activity status" align="right" height="24" src="../../blob/status/.github/activity-icons/activity2.svg" /> :clipboard: Activity - Make commit |
 |:---|
 | <p>Make a commit to this assignment repo.</p><p>Edit the [`editme.md`](../../edit/main/editme.md) file and add a question for your lecturer / teacher. When you have finished editing the file, save the changes and commit them to this repository.</p><p>You can either use the editing tools on GitHub to do this, or clone this repository to your local computer, make the changes, commit them and push the commit back to GitHub.</p> |
 
@@ -81,7 +81,7 @@ A pull request (PR) is a feature of GitHub and part of the GitHub flow. It provi
 
 Your lecturer / teacher might have setup a pull-request specifically for feedback. This PR will provide a place to see changes that you have made to the repo and a space for you to discuss with your lecturer / teacher the code that you have written.
 
-| <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/activity3.svg" /> :clipboard: Activity - Comment on Feedback PR |
+| <img alt="activity status" align="right" height="24" src="../../blob/status/.github/activity-icons/activity3.svg" /> :clipboard: Activity - Comment on Feedback PR |
 |:---|
 | Go to the [Feedback pull request](../../pull/1). At the bottom of the page you will find a comment form. Leave a comment asking your lecturer / teacher to review your previous commit. |
 
@@ -91,6 +91,6 @@ Your lecturer / teacher might have setup a pull-request specifically for feedbac
 
 Complete the knowledge review quiz. There are five multiple choice questions on the topics covered in this course.
 
-| <img align="right" width="24" height="24" src="../../blob/status/.github/activity-icons/quiz.svg" /> :clipboard: Activity - Review quiz |
+| <img alt="activity status" align="right" height="24" src="../../blob/status/.github/activity-icons/quiz.svg" /> :clipboard: Activity - Review quiz |
 |:---|
 | Edit the [`quiz.md`](../../edit/main/quiz.md) file and add your answers to each question on the same line as and after where it says 'Answer: '. When you have finished answering the questions, save the file, commit the changes and push your commit back to GitHub. |
