@@ -23,6 +23,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      # delete and recreate result dir
+      - name: Reset results dir
+        run: |
+          rm -rf .github/results
+          mkdir -p .github/results
+
       # test activity 1
       - uses: actions/github-script@v4
         name: "Check Activity 1"
