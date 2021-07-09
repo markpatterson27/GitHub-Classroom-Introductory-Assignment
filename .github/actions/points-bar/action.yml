@@ -1,0 +1,13 @@
+name: "Points Bar"
+
+description: "generates a points/progress SVG bar"
+
+inputs:
+  points:
+    description: "Points string seperated with a / slash."
+  path:
+    description: "File path to save the generated SVG to."
+
+runs:
+  using: "node12"
+  main: "dist/index.js"
