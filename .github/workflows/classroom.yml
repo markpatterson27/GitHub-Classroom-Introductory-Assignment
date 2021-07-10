@@ -242,7 +242,13 @@ jobs:
       # get quiz score
       - name: Calculate quiz score
         id: quiz-score
-        run: /bin/bash .github/grading-scripts/quiz.sh || echo "::set-output name=quiz_score::0"
+        run: |
+          if [[ $(git log feedback..main quiz.md) ]]; then
+            echo "quiz.md file changed"
+            /bin/bash .github/grading-scripts/quiz.sh || echo "::set-output name=quiz_score::0"
+          else
+            echo "quiz.md file not changed"
+          fi
 
       # switch to status branch
       - run: git checkout status || git checkout -b status
@@ -284,14 +290,16 @@ jobs:
       # make/copy quiz icon
       - name: quiz icon
         run: |
-          score=${{ steps.quiz-score.outputs.quiz_score }}
-          echo $score
+          if [[ -z "${{ steps.quiz-score.outputs.quiz_score }}" ]]; then
+            score=${{ steps.quiz-score.outputs.quiz_score }}
+            echo $score
 
-          if [[ $score == 5 ]]; then
-            cp .github/templates/quiz5.svg .github/activity-icons/quiz.svg
-          else
-            cp .github/templates/quiz.svg .github/activity-icons/quiz.svg
-            sed -i "s/><\/text>/>${score}<\/text>/" .github/activity-icons/quiz.svg
+            if [[ $score == 5 ]]; then
+              cp .github/templates/quiz5.svg .github/activity-icons/quiz.svg
+            else
+              cp .github/templates/quiz.svg .github/activity-icons/quiz.svg
+              sed -i "s/><\/text>/>${score}<\/text>/" .github/activity-icons/quiz.svg
+            fi
           fi
 
       # create points bar
