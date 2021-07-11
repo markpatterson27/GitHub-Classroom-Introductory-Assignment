@@ -1,4 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-  <rect x="1.5" y="1.5" rx="6" ry="6" width="33" height="33" stroke="#5da557" fill="#4bb442" stroke-width="3" />
-  <text x="10" y="27" font-size="24" fill="#f1f1f1" font-family="Verdana">5</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="90" height="24">
+  <title>Quiz Score: completed</title>
+  <text x="0" y="16" font-size="12px" fill="#999999" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji">Completed</text>
+
+  <svg x="66">
+  <rect x="1" y="1" rx="4" width="22px" height="22px" fill="#fff">
+      <animate attributeName="fill" begin="0.1s" dur="800ms" from="#fff" to="#4bb442" repeatCount="1" fill="freeze" calcMode="linear"/>
+  </rect>
+  <rect x="1" y="1" rx="4" width="22" height="22" stroke="#5da557" fill="none" stroke-width="2" />
+  <text x="9" y="16" font-size="12px" fill="#f1f1f1" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji">5</text>
+  </svg>
 </svg>
