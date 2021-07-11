@@ -182,61 +182,64 @@ jobs:
               // PR needs to match base branch "feedback" and have "feedback" in title
               for (pr of prList.data) {
                 if (pr.head.ref == context.ref.split('/')[2] && pr.base.ref == "feedback" && pr.title.match(/Feedback/i)) {
-                  console.log("Feedback PR found")
+                  console.log("Feedback PR found");
                   return pr.number
                 }
               }
             };
             // try to get feedback branch
             try {
-              let res = await github.repos.getBranch({
+              const resGB = await github.repos.getBranch({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 branch: 'feedback'
               });
-              console.log(`Get feedback branch response - status: ${res.status}`)
+              console.log(`Get feedback branch response - status: ${resGB.status}`)
             } catch(error) {
               if(error.name === 'HttpError' && error.status === 404) {
                 // create feedback branch
-                let res = await github.git.createRef({
+                const resCR = await github.git.createRef({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   ref: 'refs/heads/feedback',
                   sha: context.sha,
                 });
-                console.log(`Create feedback branch response - status: ${res.status}`)
+                console.log(`Create feedback branch response - status: ${resCR.status}`)
               } else {
                 throw Error(error)
               }
-            }
+            };
             // need something to diff before creating PR
             // get heads/main commit
-            let res = await github.repos.getCommit({
+            const resGC = await github.repos.getCommit({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: 'refs/heads/main',
             });
-            console.log(`Get refs/heads/main commit response - status: ${res.status}`);
+            console.log(`Get refs/heads/main commit response - status: ${resGC.status}`);
             // create empty commit
-            let res = await github.git.createCommit({
+            const treeSHA = resGC.data.commit.tree.sha;
+            const parentSHA = resGC.data.sha;
+            const resCC = await github.git.createCommit({
               owner: context.repo.owner,
               repo: context.repo.repo,
               message: 'Setup Feedback PR',
-              tree: res.data.commit.tree.sha,
-              parents: [res.data.sha],
+              tree: treeSHA,
+              parents: [parentSHA],
             });
-            console.log(`Create empty commit response - status: ${res.status}`);
+            console.log(`Create empty commit response - status: ${resCC.status}`);
             // update refs/heads/main
-            let res = await github.git.updateRef({
+            const refSHA = resCC.data.sha;
+            const resUR = await github.git.updateRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: 'heads/main',
-              sha: res.data.sha,
+              sha: refSHA,
             });
-            console.log(`Update refs response - status: ${res.status}`);
+            console.log(`Update refs response - status: ${resUR.status}`);
             // create feedback PR
             const body = `This pull request was created as a place for your Lecturer / Teacher to leave feedback on your work.`
-            let res = await github.pulls.create({
+            const resPC = await github.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               head: 'main',
@@ -244,8 +247,8 @@ jobs:
               title: 'Feedback',
               body: body,
             });
-            console.log(`Create PR response - status: ${res.status}`)
-            return res.number
+            console.log(`Create PR response - status: ${resPC.status}`);
+            return resPC.number;
 
       - run: echo ${{ steps.check-pr.outputs.result }}
 
