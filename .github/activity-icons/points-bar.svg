@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120px" height="36px">
+    <title>Points: 0/0</title>
+    <svg y="6px" height="16px" font-size="16px" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji" fill="#868E96">
+        <text x="0" y="12">Points</text>
+        <text x="120" y="12" text-anchor="end">0/0</text>
+    </svg>
+    <svg y="24" width="120px">
+        <rect rx="3" width="100%" height="6" fill="#eee" />
+        <rect rx="3" width="0%" height="6" fill="#0170f0">
+        <animate attributeName="width" begin="0.5s" dur="600ms" from="0" to="0%" repeatCount="1" fill="freeze" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1"/>
+        </rect>
+    </svg>
+</svg>
