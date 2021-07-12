@@ -162,98 +162,23 @@ jobs:
     name: Find Feedback PR
     runs-on: ubuntu-latest
     # if: ${{ github.ref == 'refs/heads/main' && github.actor != 'github-classroom[bot]' }}
-    if: ${{ github.ref == 'refs/heads/main' }}
+    # if: ${{ github.ref == 'refs/heads/main' }}
     steps:
+      - uses: actions/checkout@v2
       # check if PR exists
       # if doesn't exist, create it
-      - uses: actions/github-script@v3
+      - uses: ./.github/actions/find-pr
         id: check-pr
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            // get list of PRs
-            const prList = await github.pulls.list({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            });
-            // is PR list non-zero
-            if (Array.isArray(prList.data) && prList.data.length) {
-              // iterate through PR list looking for Feedback PR
-              // PR needs to match base branch "feedback" and have "feedback" in title
-              for (pr of prList.data) {
-                if (pr.head.ref == context.ref.split('/')[2] && pr.base.ref == "feedback" && pr.title.match(/Feedback/i)) {
-                  console.log("Feedback PR found");
-                  return pr.number
-                }
-              }
-            };
-            // try to get feedback branch
-            try {
-              const resGB = await github.repos.getBranch({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                branch: 'feedback'
-              });
-              console.log(`Get feedback branch response - status: ${resGB.status}`)
-            } catch(error) {
-              if(error.name === 'HttpError' && error.status === 404) {
-                // create feedback branch
-                const resCR = await github.git.createRef({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  ref: 'refs/heads/feedback',
-                  sha: context.sha,
-                });
-                console.log(`Create feedback branch response - status: ${resCR.status}`)
-              } else {
-                throw Error(error)
-              }
-            };
-            // need something to diff before creating PR
-            // get heads/main commit
-            const resGC = await github.repos.getCommit({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'refs/heads/main',
-            });
-            console.log(`Get refs/heads/main commit response - status: ${resGC.status}`);
-            // create empty commit
-            const treeSHA = resGC.data.commit.tree.sha;
-            const parentSHA = resGC.data.sha;
-            const resCC = await github.git.createCommit({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              message: 'Setup Feedback PR',
-              tree: treeSHA,
-              parents: [parentSHA],
-            });
-            console.log(`Create empty commit response - status: ${resCC.status}`);
-            // update refs/heads/main
-            const refSHA = resCC.data.sha;
-            const resUR = await github.git.updateRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'heads/main',
-              sha: refSHA,
-            });
-            console.log(`Update refs response - status: ${resUR.status}`);
-            // create feedback PR
-            const body = `This pull request was created as a place for your teacher to leave feedback on your work.`
-            const resPC = await github.pulls.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              head: 'main',
-              base: 'feedback',
-              title: 'Feedback',
-              body: body,
-            });
-            console.log(`Create PR response - status: ${resPC.status}`);
-            return resPC.number;
+          pr-title: Feedback
+          base-branch: feedback
+          pr-body: "This pull request was created as a place for your teacher to leave feedback on your work."
 
-      - run: echo ${{ steps.check-pr.outputs.result }}
+      - run: echo ${{ steps.check-pr.outputs.pr-number }}
 
     outputs:
-      feedback-pr: ${{ steps.check-pr.outputs.result }}
+      feedback-pr: ${{ steps.check-pr.outputs.pr-number }}
   
   # job to build activity status icons
   build-activity-icons:
