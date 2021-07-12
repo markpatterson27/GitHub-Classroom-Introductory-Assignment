@@ -1,16 +1,16 @@
-# :wave: GitHub Classroom Starter Course
+# :wave: GitHub Classroom Introductory Assignment
 
 <img alt="points bar" align="right" height="36" src="../../blob/status/.github/activity-icons/points-bar.svg" />
 
-Starter course for assessing GitHub Classroom use.
+Starter lesson for assessing GitHub Classroom use.
 
-The goal of this course is to introduce learners to using GiHub Classroom assignments and to assess that learners have the necessary skillset to complete a classroom assignment.
+The goal of this assignment is to introduce learners to using GiHub Classroom assignments and to assess that learners have the necessary skillset to complete a classroom assignment.
 
 At the end of this course, learners will be able to:
 
-1. describe what a GitHub Classroom assignment is and accept a GitHub Classroom assignment
-1. use git to complete an assignment objective
-1. use GitHub features to request feedback
+1. Describe what a GitHub Classroom assignment is and accept a GitHub Classroom assignment
+2. Use git to complete an assignment task
+3. Use GitHub features to request feedback
 
 ---
 
