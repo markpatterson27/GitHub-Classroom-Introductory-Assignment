@@ -1,3 +1,3 @@
-_Write a question for your lecturer or teacher below._
+_Write a question for your teacher below._
 
 Q: 

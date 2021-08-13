@@ -238,7 +238,7 @@ jobs:
             });
             console.log(`Update refs response - status: ${resUR.status}`);
             // create feedback PR
-            const body = `This pull request was created as a place for your Lecturer / Teacher to leave feedback on your work.`
+            const body = `This pull request was created as a place for your teacher to leave feedback on your work.`
             const resPC = await github.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
