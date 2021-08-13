@@ -4,7 +4,7 @@
 
 Starter lesson for assessing GitHub Classroom use.
 
-The goal of this assignment is to introduce learners to using GiHub Classroom assignments and to assess that learners have the necessary skillset to complete a classroom assignment.
+The goal of this assignment is to introduce learners to using GiHub Classroom assignments and to assess that learners have the necessary skill set to complete a classroom assignment.
 
 At the end of this course, learners will be able to:
 
@@ -16,7 +16,7 @@ At the end of this course, learners will be able to:
 
 ## :page_facing_up: Classroom Assignments
 
-GitHub Classroom is a tool that helps your teacher orangize and manage GitHub repositories that are used for class exercises and assessments. GitHub Classroom automates repository creation and access control, making it easy to distribute starter code and collect assignments on GitHub.
+GitHub Classroom is a tool that helps your teacher organize and manage GitHub repositories that are used for class exercises and assessments. GitHub Classroom automates repository creation and access control, making it easy to distribute starter code and collect assignments on GitHub.
 
 A GitHub Classroom assignment is a GitHub repository with access control setup so both you and your teacher can access it. When you accept an assignment, GitHub Classroom will automatically create a new repository for you. The assignment repository will belong to your course's organization account on GitHub, but you and your teacher will have access to it.
 
@@ -37,7 +37,7 @@ Once an assignment has been accepted, students no longer interact with GitHub cl
   1. click link
   1. sign in or up for GH
   1. if first time, select name from roster - this makes it easier for your teacher to identify you
-  1. wait for assignment to copy to new repositiory
+  1. wait for assignment to copy to new repository
   1. refresh page
   1. follow link to new assignment repository
 
