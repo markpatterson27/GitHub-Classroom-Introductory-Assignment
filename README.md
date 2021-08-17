@@ -16,18 +16,24 @@ At the end of this course, learners will be able to:
 
 ## :page_facing_up: Classroom Assignments
 
-GitHub Classroom is a tool that helps your teacher organize and manage GitHub repositories that are used for class exercises and assessments. GitHub Classroom automates repository creation and access control, making it easy to distribute starter code and collect assignments on GitHub.
-
-A GitHub Classroom assignment is a GitHub repository with access control setup so both you and your teacher can access it. When you accept an assignment, GitHub Classroom will automatically create a new repository for you. The assignment repository will belong to your course's organization account on GitHub, but you and your teacher will have access to it.
+A [GitHub Classroom](#learn-more-assignments) assignment is a way for your teacher to distribute coding assignments or exercises to students. Students use the same industry standard tools as used by millions of developers around the world.
 
 Assignments can make use of GitHub features to:
 
 - grade your work
 - provide a mechanism to get feedback from your teacher
 - make commenting on code easier
-- set a deadline for completion
+- set a deadline for assignment completion
 
-Once an assignment has been accepted, students no longer interact with GitHub classroom. They just interact with GitHub.
+<details>
+  <summary id="learn-more-assignments">Learn more about GitHub Classroom</summary>
+
+  GitHub Classroom is a tool that helps your teacher organize and manage GitHub repositories that are used for class exercises and assessments. GitHub Classroom automates [repository](#TODO-link-to-repo-description) creation and access control, making it easy to distribute starter code and collect assignments on GitHub.
+
+  A GitHub Classroom assignment is a GitHub repository with access control setup so both you and your teacher can access it. When you accept an assignment, GitHub Classroom will automatically create a new repository for you. The assignment repository will belong to your course's organization account on GitHub, but you and your teacher will have access to it.
+
+  Once an assignment has been accepted, students no longer interact with GitHub classroom. They just interact with GitHub.
+</details>
 
 <details>
   <summary id="assignment-steps">Accepting Classroom assignment steps</summary>
@@ -45,7 +51,7 @@ Once an assignment has been accepted, students no longer interact with GitHub cl
 
 | <img alt="activity status" align="right" height="24" src="../../blob/status/.github/activity-icons/activity1.svg" /> :keyboard: Activity - Accept assignment |
 |:---|
-| <p>Chances are, if you are reading this, you have already accepted the assignment and have completed the task. Well done. :tada:</p><p>If you haven't accepted the assignment yet and are reading this from a central site, ask your teacher for the link to the assignment, then follow the [steps](#assignment-steps) to accepting a classroom assignment. |
+| <p>Chances are, if you are reading this, you have already accepted the assignment and have completed the task. Well done. :tada:<br />(You might need to refresh the page to see the completion status).</p><p>If you haven't accepted the assignment yet and are reading this from a central site, ask your teacher for the link to the assignment, then follow the [steps](#assignment-steps) to accepting a classroom assignment. |
 
 ---
 
