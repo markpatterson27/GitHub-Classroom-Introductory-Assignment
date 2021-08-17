@@ -38,14 +38,12 @@ Assignments can make use of GitHub features to:
 <details>
   <summary id="assignment-steps">Accepting Classroom assignment steps</summary>
 
-  [#TODO: steps, or add external link]
-
-  1. click link
-  1. sign in or up for GH
-  1. if first time, select name from roster - this makes it easier for your teacher to identify you
-  1. wait for assignment to copy to new repository
-  1. refresh page
-  1. follow link to new assignment repository
+  1. Follow the assignment link your teacher gave you.
+  2. Sign in to GitHub. If you don't have a GitHub account you will need to [create one](https://github.com/join).
+  3. If it's your first time accepting an assignment for the class you may need to select your name from the class roster. This makes it easier for your teacher to identify you. (Your teacher may find it difficult to recognize your GitHub username.)
+  4. Wait for the assignment to copy to new repository. This usually only takes a few seconds.
+  5. Refresh the page.
+  6. If the new assignment repository is ready, there will be a link to it on the page. Follow the link.
 
 </details>
 
