@@ -6,7 +6,7 @@ Starter lesson for assessing GitHub Classroom use.
 
 The goal of this assignment is to introduce learners to using GiHub Classroom assignments and to assess that learners have the necessary skill set to complete a classroom assignment.
 
-At the end of this course, learners will be able to:
+At the end of this lesson, learners will be able to:
 
 1. Describe what a GitHub Classroom assignment is and accept a GitHub Classroom assignment
 2. Use git to complete an assignment task
@@ -95,7 +95,7 @@ Your teacher might have setup a pull-request specifically for feedback. This PR 
 
 ## :dart: Knowledge Check
 
-Complete the knowledge review quiz. There are five multiple choice questions on the topics covered in this course.
+Complete the knowledge review quiz. There are five multiple choice questions on the topics covered in this lesson.
 
 | <img alt="activity status" align="right" height="24" src="../../blob/status/.github/activity-icons/quiz.svg" /> :keyboard: Activity - Review quiz |
 |:---|
