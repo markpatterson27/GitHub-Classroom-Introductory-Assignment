@@ -26,7 +26,7 @@ Assignments can make use of GitHub features to:
 - set a deadline for assignment completion
 
 <details>
-  <summary id="learn-more-assignments">Learn more about GitHub Classroom</summary>
+  <summary id="learn-more-assignments">:book: Learn more about GitHub Classroom</summary>
 
   GitHub Classroom is a tool that helps your teacher organize and manage GitHub repositories that are used for class exercises and assessments. GitHub Classroom automates [repository](#TODO-link-to-repo-description) creation and access control, making it easy to distribute starter code and collect assignments on GitHub.
 
@@ -61,7 +61,8 @@ In order to complete classroom assignments, you will need to be able to use git 
 
 Git is a software tool for tracking changes across a set of files. It helps programmers to undo changes that break their code and to work collaboratively with others when developing software.
 
-If you are already family with using git, continue on. If you are new to using git, please complete the MS Learn course: [Introduction to Git](https://docs.microsoft.com/en-us/learn/modules/intro-to-git/) before continuing.
+If you are already family with using git, continue on.  
+If you are new to using git, please __complete the MS Learn course: :book:  [Introduction to Git](https://docs.microsoft.com/en-us/learn/modules/intro-to-git/)__ before continuing.
 
 ### :octocat: GitHub
 
@@ -69,7 +70,7 @@ GitHub is a cloud based service for hosting Git repositories. It provides a webs
 
 :tv: [Video: What is GitHub?](https://www.youtube.com/watch?v=w3jLJU7DT5E)
 
-To learn more about GitHub and its features, please complete the MS Learn course: [Introduction to GitHub](https://docs.microsoft.com/en-us/learn/modules/introduction-to-github/).
+To learn more about GitHub and its features, please __complete the MS Learn course: :book: [Introduction to GitHub](https://docs.microsoft.com/en-us/learn/modules/introduction-to-github/)__.
 
 | <img alt="activity status" align="right" height="24" src="../../blob/status/.github/activity-icons/activity2.svg" /> :keyboard: Activity - Make commit |
 |:---|
