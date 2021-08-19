@@ -24,6 +24,7 @@ if [[ ${#answers[@]} != 5 ]]; then
 fi
 
 score=0
+incorrect=''
 if [ $1 ]; then
   if [[ $(echo ${answers[$1 - 1]} | xargs) == "${expected[$1 - 1]}"* ]]; then
     echo "Question $1 answered correctly."
@@ -38,8 +39,10 @@ else
       echo "Question $(( $i+1 )) answered correctly."
       ((score+=1))
     else
+      incorrect="$incorrect$(( $i+1 )) "
       echo "Question $(( $i+1 )) incorrect."
     fi
   done
   echo "::set-output name=quiz_score::$score"
+  echo "::set-output name=incorrect_answers::$incorrect"
 fi

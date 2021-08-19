@@ -268,3 +268,146 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: status
+
+  # job to post feedback message in Feedback PR
+  # Classroom will create the PR when assignment accepted. PR should be issue 1.
+  post-feedback:
+    name: Post Feedback Comment
+    runs-on: ubuntu-latest
+    # run even if autograding fails. only run on main branch.
+    if: ${{ always() && github.ref == 'refs/heads/main' && github.actor != 'github-classroom[bot]' }}
+    needs: [build]
+    steps:
+      # checkout files so can access template
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # get quiz score
+      - name: Calculate quiz score
+        id: quiz-score
+        run: |
+          if [[ $(git log feedback..main quiz.md) ]]; then
+            echo "quiz.md file changed"
+            /bin/bash .github/grading-scripts/quiz.sh || echo "::set-output name=quiz_score::0"
+          else
+            echo "quiz.md file not changed"
+          fi
+
+      # read template
+      - uses: markpatterson27/markdown-to-output@v1
+        id: mto
+        with:
+          filepath: .github/templates/pr_feedback.md
+
+      # set feedback var
+      # activity 1 feedback
+      - name: activity 1 feedback
+        run: |
+          if ${{ needs.build.outputs.activity1-result == 'success' }}; then
+            message="${{ steps.mto.outputs.activity1-success }}"
+            status="${{ steps.mto.outputs.status-success }}"
+          else
+            message="${{ steps.mto.outputs.activity1-fail }}"
+            status="${{ steps.mto.outputs.status-fail }}"
+          fi
+          echo "fb-activity1=$message" >> $GITHUB_ENV
+          echo "status-activity1=$status" >> $GITHUB_ENV
+
+      # activity 2 feedback
+      - name: activity 2 feedback
+        run: |
+          if ${{ needs.build.outputs.activity2-result == 'success' }}; then
+            message="${{ steps.mto.outputs.activity2-success }}"
+            status="${{ steps.mto.outputs.status-success }}"
+          else
+            message="${{ steps.mto.outputs.activity2-fail }}"
+            status="${{ steps.mto.outputs.status-fail }}"
+          fi
+          echo "fb-activity2=$message" >> $GITHUB_ENV
+          echo "status-activity2=$status" >> $GITHUB_ENV
+
+      # activity 3 feedback
+      - name: activity 3 feedback
+        run: |
+          if ${{ needs.build.outputs.activity3-result == 'success' }}; then
+            message="${{ steps.mto.outputs.activity3-success }}"
+            status="${{ steps.mto.outputs.status-success }}"
+          else
+            message="${{ steps.mto.outputs.activity3-fail }}"
+            status="${{ steps.mto.outputs.status-fail }}"
+          fi
+          echo "fb-activity3=$message" >> $GITHUB_ENV
+          echo "status-activity3=$status" >> $GITHUB_ENV
+
+      # quiz feedback
+      - name: quiz feedback
+        run: |
+          if [[ $(git log feedback..main quiz.md) ]]; then
+            score=${{ steps.quiz-score.outputs.quiz_score }}
+            incorrect=(${{ steps.quiz-score.outputs.incorrect_answers }})
+            message=""
+
+            if [[ $score == 5 ]]; then
+              message="${{ steps.mto.outputs.quiz-success }}"
+              status="${{ steps.mto.outputs.status-success }}"
+            else
+              for i in ${incorrect[@]}; do
+                message+="Question $i incorrect. Try again.  %0A"
+              done
+
+              case $score in
+                0) status=":zero:" ;;
+                1) status=":one:" ;;
+                2) status=":two:" ;;
+                3) status=":three:" ;;
+                4) status=":four:" ;;
+              esac
+            fi
+          else
+            message="Quiz not attempted"
+            status=":zero:"
+          fi
+
+          echo "fb-quiz=$message" >> $GITHUB_ENV
+          echo "status-quiz=$status" >> $GITHUB_ENV
+
+      # replace tokens
+      # read template file and replace tokens. token replacement based on env name.
+      - name: prepare comment and substitute tokens
+        id: prep
+        uses: actions/github-script@v3
+        env:
+          points: ${{ needs.build.outputs.grading-score }}
+          template: ${{ steps.mto.outputs.body }}
+        with:
+          script: |
+            const fs = require('fs')
+            let commentBody = process.env.template
+
+            for (envName in process.env) {
+              commentBody = commentBody.replace("${"+envName+"}", process.env[envName]
+                .replace(/%0D/g, '\r')
+                .replace(/%0A/g, '\n')
+                .replace(/%25/g, '\%'))
+            }
+
+            return commentBody
+          result-encoding: string
+
+      # post comment on feedback PR. issues and PRs have same numbers
+      - name: post comment
+        uses: actions/github-script@v3
+        env:
+          MESSAGE: ${{ steps.prep.outputs.result }}
+          ISSUE: ${{ needs.build.outputs.feedback-pr }}
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const { MESSAGE, ISSUE } = process.env
+            await github.issues.createComment({
+              issue_number: process.env.ISSUE,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `${MESSAGE}`
+            })
