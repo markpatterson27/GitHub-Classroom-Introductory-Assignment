@@ -18,10 +18,25 @@ jobs:
   build:
     name: Autograding
     runs-on: ubuntu-latest
-    needs: find-feedback-pr
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v2
+
+      # pause to wait for classroom bot to setup feedback PR
+      - if: ${{ github.actor == 'github-classroom[bot]' }}
+        run: sleep 60
+
+      # check if PR exists
+      # if doesn't exist, create it
+      - name: Find PR number
+        uses: ./.github/actions/find-pr
+        id: check-pr
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          pr-title: Feedback
+          base-branch: feedback
+          pr-body: "This pull request was created as a place for your teacher to leave feedback on your work."
+      - run: echo ${{ steps.check-pr.outputs.pr-number }}
 
       # delete and recreate result dir
       - name: Reset results dir
@@ -104,7 +119,7 @@ jobs:
         name: "Check Activity 3"
         id: activity3
         env:
-          ISSUE: ${{ needs.find-feedback-pr.outputs.feedback-pr }}
+          ISSUE: ${{ steps.check-pr.outputs.pr-number }}
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
@@ -156,30 +171,8 @@ jobs:
       activity1-result: ${{ steps.activity1.outputs.result }}
       activity2-result: ${{ steps.activity2.outputs.result }}
       activity3-result: ${{ steps.activity3.outputs.result }}
-
-  # job to find Feedback PR issue number. If created by Classroom, should be issue 1.
-  find-feedback-pr:
-    name: Find Feedback PR
-    runs-on: ubuntu-latest
-    # if: ${{ github.ref == 'refs/heads/main' && github.actor != 'github-classroom[bot]' }}
-    # if: ${{ github.ref == 'refs/heads/main' }}
-    steps:
-      - uses: actions/checkout@v2
-      # check if PR exists
-      # if doesn't exist, create it
-      - uses: ./.github/actions/find-pr
-        id: check-pr
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          pr-title: Feedback
-          base-branch: feedback
-          pr-body: "This pull request was created as a place for your teacher to leave feedback on your work."
-
-      - run: echo ${{ steps.check-pr.outputs.pr-number }}
-
-    outputs:
       feedback-pr: ${{ steps.check-pr.outputs.pr-number }}
-  
+
   # job to build activity status icons
   build-activity-icons:
     name: Build Activity Icons
