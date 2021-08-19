@@ -53,7 +53,7 @@ Assignments can make use of GitHub features to:
 
 ---
 
-## :octocat: git and GitHub
+## :octocat: Git and GitHub
 
 In order to complete classroom assignments, you will need to be able to use git and be familiar with GitHub.
 
