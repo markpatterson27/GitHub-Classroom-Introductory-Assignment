@@ -318,7 +318,7 @@ jobs:
       # make/copy quiz icon
       - name: quiz icon
         run: |
-          if [[ -z "${{ steps.quiz-score.outputs.quiz_score }}" ]]; then
+          if [[ ! -z "${{ steps.quiz-score.outputs.quiz_score }}" ]]; then
             score=${{ steps.quiz-score.outputs.quiz_score }}
             echo $score
 
@@ -326,6 +326,7 @@ jobs:
               cp .github/templates/quiz5.svg .github/activity-icons/quiz.svg
             else
               cp .github/templates/quiz.svg .github/activity-icons/quiz.svg
+              sed -i "s/><\/text>/>${score}<\/text>/" .github/activity-icons/quiz.svg
               sed -i "s/>[0-9]<\/text>/>${score}<\/text>/" .github/activity-icons/quiz.svg
             fi
           fi
