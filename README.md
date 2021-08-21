@@ -16,7 +16,7 @@ At the end of this lesson, learners will be able to:
 
 ## :page_facing_up: Classroom Assignments
 
-A [GitHub Classroom](#learn-more-assignments) assignment is a way for your teacher to distribute coding assignments or exercises to students. Students use the same industry standard tools as used by millions of developers around the world.
+A [GitHub Classroom](#learn-more-assignments) assignment is a way that your teacher can distribute coding assignments or exercises to students. Assignments are distributed as GitHub [repositories](#terms). Once an assignment is accepted, students only interact with GitHub. This means students use the same industry standard tools as used by millions of developers around the world.
 
 Assignments can make use of GitHub features to:
 
@@ -28,7 +28,7 @@ Assignments can make use of GitHub features to:
 <details>
   <summary id="learn-more-assignments">:book: Learn more about GitHub Classroom</summary>
 
-  GitHub Classroom is a tool that helps your teacher organize and manage GitHub repositories that are used for class exercises and assessments. GitHub Classroom automates [repository](#terms) creation and access control, making it easy to distribute starter code and collect assignments on GitHub.
+  GitHub Classroom is a tool that helps your teacher organize and manage GitHub repositories that are used for class exercises and assessments. GitHub Classroom automates repository creation and access control, making it easy to distribute starter code and collect assignments on GitHub.
 
   A GitHub Classroom assignment is a GitHub repository with access control setup so both you and your teacher can access it. When you accept an assignment, GitHub Classroom will automatically create a new repository for you. The assignment repository will belong to your course's organization account on GitHub, but you and your teacher will have access to it.
 
