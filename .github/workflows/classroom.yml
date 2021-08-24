@@ -24,7 +24,7 @@ jobs:
 
       # pause to wait for classroom bot to setup feedback PR
       - if: ${{ github.actor == 'github-classroom[bot]' }}
-        run: sleep 60
+        run: sleep 30
 
       # check if PR exists
       # if doesn't exist, create it
