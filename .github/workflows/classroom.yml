@@ -263,11 +263,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add '.github/activity-icons'
           git commit -m "Add/Update activity icons" || exit 0
-      - name: Push badge commit
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: status
+          git push origin status
 
   # job to post feedback message in Feedback PR
   # Classroom will create the PR when assignment accepted. PR should be issue 1.
