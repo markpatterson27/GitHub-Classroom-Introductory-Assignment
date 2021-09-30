@@ -251,7 +251,7 @@ jobs:
 
       # create points bar
       - name: points bar
-        uses: ./.github/actions/points-bar
+        uses: markpatterson27/points-bar@v1
         with:
           points: ${{ needs.build.outputs.grading-score }}
           path: '.github/activity-icons/points-bar.svg'
