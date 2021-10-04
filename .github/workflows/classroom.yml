@@ -63,7 +63,8 @@ jobs:
             console.log(collaborators)
 
             // check if one of collab list matches repository name suffix. make case insensitive.
-            if (collaborators.some(collaborator=>repoName.endsWith(collaborator.login.toLowerCase()))) {
+            // pattern is `assignmentname-username` or `assignmentname-username-i`. #TODO: optionally remove number suffix and use endsWith to match
+            if (collaborators.some(collaborator=>repoName.includes(collaborator.login.toLowerCase()))) {
               console.log("found collaborator match to repo suffix")
 
               // write result to file
