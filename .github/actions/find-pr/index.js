@@ -12,6 +12,15 @@ async function findPR () {
         // auth octokit
         const octokit = new github.getOctokit(token);
 
+        // get default branch
+        const repo = await octokit.rest.repos.get({
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+        });
+        console.log(`Get repo response - status: ${repo.status}`);
+        const defaultBranch = repo.data.default_branch;
+        console.log(`Default branch: ${defaultBranch}`);
+
         // get list of PRs
         const prList = await octokit.rest.pulls.list({
             owner: github.context.repo.owner,
@@ -24,7 +33,11 @@ async function findPR () {
             // iterate through PR list looking for Feedback PR
             // PR needs to match base branch and match prTitle
             for (pr of prList.data) {
-                if (pr.head.ref == github.context.ref.split('/')[2] && pr.base.ref == baseBranch && pr.title.match(new RegExp(prTitle, 'i'))) {
+                // if
+                // PR head == default branch
+                // && PR base == baseBranch (feedback)
+                // && PR title == title (Feedback)
+                if (pr.head.ref == defaultBranch && pr.base.ref == baseBranch && pr.title.match(new RegExp(prTitle, 'i'))) {
                     console.log(`${prTitle} PR found`);
                     return pr.number
                 }
