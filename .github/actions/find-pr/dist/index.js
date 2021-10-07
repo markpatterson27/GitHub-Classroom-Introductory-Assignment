@@ -3637,6 +3637,15 @@ async function findPR () {
         // auth octokit
         const octokit = new github.getOctokit(token);
 
+        // get default branch
+        const repo = await octokit.rest.repos.get({
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+        });
+        console.log(`Get repo response - status: ${repo.status}`);
+        const defaultBranch = repo.data.default_branch;
+        console.log(`Default branch: ${defaultBranch}`);
+
         // get list of PRs
         const prList = await octokit.rest.pulls.list({
             owner: github.context.repo.owner,
@@ -3649,7 +3658,11 @@ async function findPR () {
             // iterate through PR list looking for Feedback PR
             // PR needs to match base branch and match prTitle
             for (pr of prList.data) {
-                if (pr.head.ref == github.context.ref.split('/')[2] && pr.base.ref == baseBranch && pr.title.match(new RegExp(prTitle, 'i'))) {
+                // if
+                // PR head == default branch
+                // && PR base == baseBranch (feedback)
+                // && PR title == title (Feedback)
+                if (pr.head.ref == defaultBranch && pr.base.ref == baseBranch && pr.title.match(new RegExp(prTitle, 'i'))) {
                     console.log(`${prTitle} PR found`);
                     return pr.number
                 }
@@ -3658,13 +3671,13 @@ async function findPR () {
 
         console.log(`${prTitle} PR not found`);
 
-        // get last commit on main
+        // get last commit on defaultBranch
         const responseGetCommit = await octokit.rest.repos.getCommit({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
-            ref: 'refs/heads/main',
+            ref: `refs/heads/${defaultBranch}`,
         });
-        console.log(`Get refs/heads/main commit response - status: ${responseGetCommit.status}`);
+        console.log(`Get refs/heads/${defaultBranch} commit response - status: ${responseGetCommit.status}`);
         const lastCommit = responseGetCommit.data;
 
         var baseBranchSHA;
@@ -3701,7 +3714,7 @@ async function findPR () {
         console.log(`base SHA: ${baseBranchSHA}`); //debug
         console.log(`last commit SHA: ${lastCommit.sha}`); //debug
 
-        // if base and main branches have same sha
+        // if base and defaultBranch branches have same sha
         if (baseBranchSHA == lastCommit.sha) {
             // create empty commit
             const responseCreateCommit = await octokit.rest.git.createCommit({
@@ -3713,11 +3726,11 @@ async function findPR () {
             });
             console.log(`Create empty commit response - status: ${responseCreateCommit.status}`);
 
-            // update refs/heads/main
+            // update refs/heads/defaultBranch
             const responseUpdateRef = await octokit.rest.git.updateRef({
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
-                ref: 'heads/main',
+                ref: `heads/${defaultBranch}`,
                 sha: responseCreateCommit.data.sha,
             });
             console.log(`Update refs response - status: ${responseUpdateRef.status}`);
@@ -3727,7 +3740,7 @@ async function findPR () {
         const responsePullsCreate = await octokit.rest.pulls.create({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
-            head: 'main',
+            head: defaultBranch,
             base: baseBranch,
             title: prTitle,
             body: prBody,
