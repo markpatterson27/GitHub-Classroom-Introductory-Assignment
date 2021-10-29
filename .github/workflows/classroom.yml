@@ -190,7 +190,7 @@ jobs:
       - name: Calculate quiz score
         id: quiz-score
         run: |
-          if [[ $(git log feedback..main quiz.md) ]]; then
+          if [[ $(git log remotes/origin/feedback..main quiz.md) ]]; then
             echo "quiz.md file changed"
             /bin/bash .github/grading-scripts/quiz.sh || echo "::set-output name=quiz_score::0"
           else
@@ -284,7 +284,7 @@ jobs:
       - name: Calculate quiz score
         id: quiz-score
         run: |
-          if [[ $(git log feedback..main quiz.md) ]]; then
+          if [[ $(git log remotes/origin/feedback..main quiz.md) ]]; then
             echo "quiz.md file changed"
             /bin/bash .github/grading-scripts/quiz.sh || echo "::set-output name=quiz_score::0"
           else
@@ -340,7 +340,7 @@ jobs:
       # quiz feedback
       - name: quiz feedback
         run: |
-          if [[ $(git log feedback..main quiz.md) ]]; then
+          if [[ $(git log remotes/origin/feedback..main quiz.md) ]]; then
             score=${{ steps.quiz-score.outputs.quiz_score }}
             incorrect=(${{ steps.quiz-score.outputs.incorrect_answers }})
             message=""
