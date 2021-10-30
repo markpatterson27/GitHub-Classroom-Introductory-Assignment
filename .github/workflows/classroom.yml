@@ -43,17 +43,17 @@ jobs:
           result-encoding: string
       - run: echo "Default branch name - ${{ steps.default-branch-name.outputs.result }}"
 
-      # check if PR exists
-      # if doesn't exist, create it
+      # find PR if it exists
       - name: Find PR number
-        uses: ./.github/actions/find-pr
+        uses: markpatterson27/find-pull-request-action@pre-pr-release
         id: check-pr
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
-          pr-title: Feedback
-          base-branch: feedback
-          pr-body: "This pull request was created as a place for your teacher to leave feedback on your work."
-      - run: echo ${{ steps.check-pr.outputs.pr-number }}
+          title: Feedback
+          base: feedback
+          branch: ${{ steps.default-branch-name.outputs.result }}
+          state: all
+      - run: echo ${{ steps.check-pr.outputs.number }}
 
       # delete and recreate result dir
       - name: Reset results dir
@@ -190,7 +190,7 @@ jobs:
       activity2-result: ${{ steps.activity2.outputs.result }}
       activity3-result: ${{ steps.activity3.outputs.result }}
       default-branch-name: ${{ steps.default-branch-name.outputs.result }}
-      feedback-pr: ${{ steps.check-pr.outputs.pr-number }}
+      feedback-pr: ${{ steps.check-pr.outputs.number }}
 
   # job to build activity status icons
   build-activity-icons:
