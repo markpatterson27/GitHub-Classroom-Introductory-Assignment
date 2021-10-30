@@ -55,6 +55,22 @@ jobs:
           state: all
       - run: echo ${{ steps.check-pr.outputs.number }}
 
+      # re-open PR if closed
+      - name: Re-open PR
+        if: ${{ steps.check-pr.outputs.state == 'closed' }}
+        uses: actions/github-script@v5
+        env:
+            PR_NUMBER: ${{ steps.check-pr.outputs.number }}
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: process.env.PR_NUMBER,
+              state: 'open'
+            });
+
       # delete and recreate result dir
       - name: Reset results dir
         run: |
