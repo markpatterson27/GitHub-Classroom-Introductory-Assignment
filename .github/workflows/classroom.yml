@@ -152,8 +152,9 @@ jobs:
       - uses: actions/github-script@v4
         name: "Check Activity 3"
         id: activity3
+        if: ${{ steps.check-pr.outputs.number }}
         env:
-          ISSUE: ${{ steps.check-pr.outputs.pr-number }}
+          ISSUE: ${{ steps.check-pr.outputs.number }}
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
@@ -305,8 +306,8 @@ jobs:
   post-feedback:
     name: Post Feedback Comment
     runs-on: ubuntu-latest
-    # run even if autograding fails. only run on main branch.
-    if: ${{ always() && github.ref == 'refs/heads/main' && github.actor != 'github-classroom[bot]' }}
+    # run even if autograding fails. only run on main branch and if pr exists.
+    if: ${{ always() && needs.build.outputs.feedback-pr != '' && github.ref == 'refs/heads/main' && github.actor != 'github-classroom[bot]' }}
     needs: [build]
     steps:
       # checkout files so can access template
