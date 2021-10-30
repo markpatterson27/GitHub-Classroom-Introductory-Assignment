@@ -26,6 +26,23 @@ jobs:
       - if: ${{ github.actor == 'github-classroom[bot]' }}
         run: sleep 30
 
+      # Default branch is usually 'main', but in case it isn't get default branch name
+      - name: Get default branch name
+        uses: actions/github-script@v5
+        id: default-branch-name
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            // get default branch
+            const repo = await github.rest.repos.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            console.log(`Get repo response - status: ${repo.status}`);
+            return repo.data.default_branch;
+          result-encoding: string
+      - run: echo "Default branch name - ${{ steps.default-branch-name.outputs.result }}"
+
       # check if PR exists
       # if doesn't exist, create it
       - name: Find PR number
@@ -172,6 +189,7 @@ jobs:
       activity1-result: ${{ steps.activity1.outputs.result }}
       activity2-result: ${{ steps.activity2.outputs.result }}
       activity3-result: ${{ steps.activity3.outputs.result }}
+      default-branch-name: ${{ steps.default-branch-name.outputs.result }}
       feedback-pr: ${{ steps.check-pr.outputs.pr-number }}
 
   # job to build activity status icons
