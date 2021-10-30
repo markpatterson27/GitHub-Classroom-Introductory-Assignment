@@ -301,6 +301,55 @@ jobs:
           git commit -m "Add/Update activity icons" || exit 0
           git push origin status
 
+  # create Feedback PR
+  create-feedback-pr:
+    name: Create Feedback PR
+    runs-on: ubuntu-latest
+    # run even if autograding fails.
+    if: ${{ always() && needs.build.outputs.feedback-pr == '' }}
+    needs: [build]
+    steps:
+      # checkout files so can access template
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # read template
+      - uses: markpatterson27/markdown-to-output@v1
+        id: mto
+        with:
+          filepath: .github/templates/pr_body.md
+      
+      # switch to feedback branch
+      - name: Create feedback branch
+        run: |
+          git checkout feedback || git checkout -b feedback
+          git push origin feedback
+
+      # check if base and head are same. create empty commit if they are
+      - name: Create empty commit
+        env:
+          DEFAULT_BRANCH: ${{ needs.build.outputs.default-branch-name }}
+        run: |
+          if [[ $(git rev-parse feedback) == $(git rev-parse $DEFAULT_BRANCH) ]]; then
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git checkout $DEFAULT_BRANCH
+            git commit -m "Setup Feedback PR" --allow-empty
+            git push origin $DEFAULT_BRANCH
+          fi
+
+      # create feedback pr
+      - name: Create Feedback PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          title: "Feedback"
+          body: ${{ steps.mto.outputs.body }}
+          base: feedback
+          head: ${{ needs.build.outputs.default-branch-name }}
+        run: |
+          gh pr create --base "$base" --head "$head" --title "$title" --body "$body"
+
   # job to post feedback message in Feedback PR
   # Classroom will create the PR when assignment accepted. PR should be issue 1.
   post-feedback:
