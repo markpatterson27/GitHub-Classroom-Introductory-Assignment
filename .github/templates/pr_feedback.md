@@ -8,7 +8,37 @@ activity2-fail: |
   A commit authored by you has not been found.
   <details>
     <summary>How to make a git commit</summary>
-    #TODO - instructions
+    
+    **Clone** - [Clone](https://github.com/git-guides/git-clone) the repository to your local machine.
+
+    \`\`\`
+    git clone https://github.com/${GITHUB_REPOSITORY}.git
+    \`\`\`
+
+    **Edit** - Edit and save the files.
+
+    \`\`\`
+    cd ${REPO_NAME}
+    code editme.md
+    \`\`\`
+
+    **Add** - [Add](https://github.com/git-guides/git-add) the changes to staging.
+    
+    \`\`\`
+    git add editme.md
+    \`\`\`
+
+    **Commit** - [Commit](https://github.com/git-guides/git-commit) the changes to the git repo.
+
+    \`\`\`
+    git commit -m \"asked a question in editme.md\"
+    \`\`\`
+
+    **Push** - [Push](https://github.com/git-guides/git-push) the new commits back to the remote repository.
+
+    \`\`\`
+    git push origin main
+    \`\`\`
   </details>
 activity3-success: Interesting comment.
 activity3-fail: Leave a comment below.

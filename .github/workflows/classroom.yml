@@ -375,6 +375,11 @@ jobs:
             echo "quiz.md file not changed"
           fi
 
+      # set env var
+      - name: Set additional environment variables
+        run: |
+          echo "REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
+
       # read template
       - uses: markpatterson27/markdown-to-output@v1
         id: mto
