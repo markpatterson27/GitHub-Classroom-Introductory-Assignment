@@ -1,0 +1,5 @@
+text="$1"
+text="${text//$'%'/%25}"
+text="${text//$'\n'/'%0A'}"
+text="${text//$'\r'/%0D}"
+echo "$text"
