@@ -191,18 +191,18 @@ jobs:
       # add id to step so outputs can be referenced
       - uses: education/autograding@v1
         name: "** Grading and Feedback **"
-        id: autograder
+        id: autograde
         continue-on-error: true
 
-      # # fail job if autograder returns failed
+      # # fail job if autograde returns failed
       # # outcome can be 'success', 'failure', 'cancelled', or 'skipped'
       # # trigger fail either on !success or on failure depending on preference
-      # - name: check autograder pass fail
-      #   if: ${{ steps.autograder.outcome != 'success' }}
+      # - name: check autograde pass fail
+      #   if: ${{ steps.autograde.outcome != 'success' }}
       #   run: exit 1
 
     outputs:
-      grading-score: ${{ steps.autograder.outputs.Points }}
+      grading-score: ${{ steps.autograde.outputs.Points }}
       activity1-result: ${{ steps.activity1.outputs.result }}
       activity2-result: ${{ steps.activity2.outputs.result }}
       activity3-result: ${{ steps.activity3.outputs.result }}
