@@ -392,8 +392,8 @@ jobs:
             message="${{ steps.mto.outputs.activity1-fail }}"
             status="${{ steps.mto.outputs.status-fail }}"
           fi
-          echo "fb-activity1=$message" >> $GITHUB_ENV
-          echo "status-activity1=$status" >> $GITHUB_ENV
+          echo "fb-activity1=$(/bin/bash .github/scripts/escape.sh "$message")" >> $GITHUB_ENV
+          echo "status-activity1=$(/bin/bash .github/scripts/escape.sh "$status")" >> $GITHUB_ENV
 
       # activity 2 feedback
       - name: activity 2 feedback
@@ -405,8 +405,8 @@ jobs:
             message="${{ steps.mto.outputs.activity2-fail }}"
             status="${{ steps.mto.outputs.status-fail }}"
           fi
-          echo "fb-activity2=$message" >> $GITHUB_ENV
-          echo "status-activity2=$status" >> $GITHUB_ENV
+          echo "fb-activity2=$(/bin/bash .github/scripts/escape.sh "$message")" >> $GITHUB_ENV
+          echo "status-activity2=$(/bin/bash .github/scripts/escape.sh "$status")" >> $GITHUB_ENV
 
       # activity 3 feedback
       - name: activity 3 feedback
@@ -418,8 +418,8 @@ jobs:
             message="${{ steps.mto.outputs.activity3-fail }}"
             status="${{ steps.mto.outputs.status-fail }}"
           fi
-          echo "fb-activity3=$message" >> $GITHUB_ENV
-          echo "status-activity3=$status" >> $GITHUB_ENV
+          echo "fb-activity3=$(/bin/bash .github/scripts/escape.sh "$message")" >> $GITHUB_ENV
+          echo "status-activity3=$(/bin/bash .github/scripts/escape.sh "$status")" >> $GITHUB_ENV
 
       # quiz feedback
       - name: quiz feedback
@@ -450,8 +450,8 @@ jobs:
             status=":zero:"
           fi
 
-          echo "fb-quiz=$message" >> $GITHUB_ENV
-          echo "status-quiz=$status" >> $GITHUB_ENV
+          echo "fb-quiz=$(/bin/bash .github/scripts/escape.sh "$message")" >> $GITHUB_ENV
+          echo "status-quiz=$(/bin/bash .github/scripts/escape.sh "$status")" >> $GITHUB_ENV
 
       # replace tokens
       # read template file and replace tokens. token replacement based on env name.
