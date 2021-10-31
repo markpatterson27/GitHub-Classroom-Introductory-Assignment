@@ -434,7 +434,7 @@ jobs:
               status="${{ steps.mto.outputs.status-success }}"
             else
               for i in ${incorrect[@]}; do
-                message+="Question $i incorrect. Try again.  %0A"
+                message+="Question $i incorrect. Try again.  "$'\n'
               done
 
               case $score in
