@@ -19,6 +19,7 @@ jobs:
     name: Autograding
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    if: ${{ !(github.event_name == 'issue_comment') || contains(github.event.repository.name, github.actor) }}
     steps:
       - uses: actions/checkout@v2
 
@@ -213,7 +214,7 @@ jobs:
   build-activity-icons:
     name: Build Activity Icons
     runs-on: ubuntu-latest
-    if: always()
+    if: ${{ always() && (!(github.event_name == 'issue_comment') || contains(github.event.repository.name, github.actor)) }}
     needs: build
     steps:
       # need to checkout whole repo
