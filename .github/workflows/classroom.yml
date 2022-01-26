@@ -481,6 +481,13 @@ jobs:
             return commentBody
           result-encoding: string
 
+      # hide old feedback comments
+      - name: hide old feedback comments
+        uses: kanga333/comment-hider@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_number: ${{ needs.build.outputs.feedback-pr }}
+
       # post comment on feedback PR. issues and PRs have same numbers
       - name: post comment
         uses: actions/github-script@v3
