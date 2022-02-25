@@ -2,7 +2,10 @@
 status-success: ':white_check_mark:'
 status-fail: ':x:'
 activity1-success:
-activity1-fail: Not sure how you got to this point without accepting the assignment. There is probably a bug in the marking code. Please submit an issue to https://github.com/markpatterson27/GitHub-Classroom-Introductory-Assignment/issues.
+activity1-fail: |
+  This assignment is designed to be run via [GitHub Classroom](https://classroom.github.com). If you got here without being given an assignment URL from your teacher, please speak to your teacher about setting up a [Classroom assignment](https://docs.github.com/en/education/manage-coursework-with-github-classroom/teach-with-github-classroom/create-an-individual-assignment).
+
+  If your teacher did give you an assignment URL and you still got this message, there is probably a bug in the marking code. Please submit an issue to https://github.com/markpatterson27/GitHub-Classroom-Introductory-Assignment/issues describing the issue (preferably including a link back to _your_ assignment repo).
 activity2-success: Yay. You made a commit.
 activity2-fail: |
   A commit authored by you has not been found.
