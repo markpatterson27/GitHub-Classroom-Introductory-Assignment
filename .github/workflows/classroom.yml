@@ -495,7 +495,7 @@ jobs:
 
       # post comment on feedback PR. issues and PRs have same numbers
       - name: post comment
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         env:
           MESSAGE: ${{ steps.prep.outputs.result }}
           ISSUE: ${{ needs.grade.outputs.feedback-pr }}
@@ -503,8 +503,8 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const { MESSAGE, ISSUE } = process.env
-            await github.issues.createComment({
-              issue_number: process.env.ISSUE,
+            await github.rest.issues.createComment({
+              issue_number: ISSUE,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `${MESSAGE}`
