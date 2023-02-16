@@ -15,7 +15,7 @@ on:
 
 jobs:
   # job to run autograding
-  build:
+  grade:
     name: Autograding
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -219,7 +219,7 @@ jobs:
     name: Build Activity Icons
     runs-on: ubuntu-latest
     if: ${{ always() && (!(github.event_name == 'issue_comment') || contains(github.event.repository.name, github.actor)) }}
-    needs: build
+    needs: grade
     steps:
       # need to checkout whole repo
       - uses: actions/checkout@v2
@@ -247,8 +247,8 @@ jobs:
       # make/copy activity 1 icon
       - name: activity 1 icon
         run: |
-          echo ${{ needs.build.outputs.activity1-result }}
-          if ${{ needs.build.outputs.activity1-result == 'success' }}; then
+          echo ${{ needs.grade.outputs.activity1-result }}
+          if ${{ needs.grade.outputs.activity1-result == 'success' }}; then
             cp .github/templates/activity-completed.svg .github/activity-icons/activity1.svg
           else
             cp .github/templates/activity-incomplete.svg .github/activity-icons/activity1.svg
@@ -257,8 +257,8 @@ jobs:
       # make/copy activity 2 icon
       - name: activity 2 icon
         run: |
-          echo ${{ needs.build.outputs.activity2-result }}
-          if ${{ needs.build.outputs.activity2-result == 'success' }}; then
+          echo ${{ needs.grade.outputs.activity2-result }}
+          if ${{ needs.grade.outputs.activity2-result == 'success' }}; then
             cp .github/templates/activity-completed.svg .github/activity-icons/activity2.svg
           else
             cp .github/templates/activity-incomplete.svg .github/activity-icons/activity2.svg
@@ -267,8 +267,8 @@ jobs:
       # make/copy activity 3 icon
       - name: activity 3 icon
         run: |
-          echo ${{ needs.build.outputs.activity3-result }}
-          if ${{ needs.build.outputs.activity3-result == 'success' }}; then
+          echo ${{ needs.grade.outputs.activity3-result }}
+          if ${{ needs.grade.outputs.activity3-result == 'success' }}; then
             cp .github/templates/activity-completed.svg .github/activity-icons/activity3.svg
           else
             cp .github/templates/activity-incomplete.svg .github/activity-icons/activity3.svg
@@ -294,7 +294,7 @@ jobs:
       - name: points bar
         uses: markpatterson27/points-bar@v1
         with:
-          points: ${{ needs.build.outputs.grading-score }}
+          points: ${{ needs.grade.outputs.grading-score }}
           path: '.github/activity-icons/points-bar.svg'
 
       # commit and push activity icons if statuses have changed
@@ -311,8 +311,8 @@ jobs:
     name: Create Feedback PR
     runs-on: ubuntu-latest
     # run even if autograding fails.
-    if: ${{ always() && needs.build.outputs.feedback-pr == '' }}
-    needs: [build]
+    if: ${{ always() && needs.grade.outputs.feedback-pr == '' }}
+    needs: [grade]
     steps:
       # checkout files so can access template
       - uses: actions/checkout@v2
@@ -334,7 +334,7 @@ jobs:
       # check if base and head are same. create empty commit if they are
       - name: Create empty commit
         env:
-          DEFAULT_BRANCH: ${{ needs.build.outputs.default-branch-name }}
+          DEFAULT_BRANCH: ${{ needs.grade.outputs.default-branch-name }}
         run: |
           if [[ $(git rev-parse feedback) == $(git rev-parse $DEFAULT_BRANCH) ]]; then
             git config --local user.email "action@github.com"
@@ -351,7 +351,7 @@ jobs:
           title: "Feedback"
           body: ${{ steps.mto.outputs.body }}
           base: feedback
-          head: ${{ needs.build.outputs.default-branch-name }}
+          head: ${{ needs.grade.outputs.default-branch-name }}
         run: |
           gh pr create --base "$base" --head "$head" --title "$title" --body "$body"
 
@@ -361,8 +361,8 @@ jobs:
     name: Post Feedback Comment
     runs-on: ubuntu-latest
     # run even if autograding fails. only run on main branch and if pr exists.
-    if: ${{ always() && needs.build.outputs.feedback-pr != '' && github.ref == 'refs/heads/main' && github.actor != 'github-classroom[bot]' }}
-    needs: [build]
+    if: ${{ always() && needs.grade.outputs.feedback-pr != '' && github.ref == 'refs/heads/main' && github.actor != 'github-classroom[bot]' }}
+    needs: [grade]
     steps:
       # checkout files so can access template
       - uses: actions/checkout@v2
@@ -395,7 +395,7 @@ jobs:
       # activity 1 feedback
       - name: activity 1 feedback
         run: |
-          if ${{ needs.build.outputs.activity1-result == 'success' }}; then
+          if ${{ needs.grade.outputs.activity1-result == 'success' }}; then
             message="${{ steps.mto.outputs.activity1-success }}"
             status="${{ steps.mto.outputs.status-success }}"
           else
@@ -408,7 +408,7 @@ jobs:
       # activity 2 feedback
       - name: activity 2 feedback
         run: |
-          if ${{ needs.build.outputs.activity2-result == 'success' }}; then
+          if ${{ needs.grade.outputs.activity2-result == 'success' }}; then
             message="${{ steps.mto.outputs.activity2-success }}"
             status="${{ steps.mto.outputs.status-success }}"
           else
@@ -421,7 +421,7 @@ jobs:
       # activity 3 feedback
       - name: activity 3 feedback
         run: |
-          if ${{ needs.build.outputs.activity3-result == 'success' }}; then
+          if ${{ needs.grade.outputs.activity3-result == 'success' }}; then
             message="${{ steps.mto.outputs.activity3-success }}"
             status="${{ steps.mto.outputs.status-success }}"
           else
@@ -469,7 +469,7 @@ jobs:
         id: prep
         uses: actions/github-script@v3
         env:
-          points: ${{ needs.build.outputs.grading-score }}
+          points: ${{ needs.grade.outputs.grading-score }}
           template: ${{ steps.mto.outputs.body }}
         with:
           script: |
@@ -491,14 +491,14 @@ jobs:
         uses: kanga333/comment-hider@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          issue_number: ${{ needs.build.outputs.feedback-pr }}
+          issue_number: ${{ needs.grade.outputs.feedback-pr }}
 
       # post comment on feedback PR. issues and PRs have same numbers
       - name: post comment
         uses: actions/github-script@v3
         env:
           MESSAGE: ${{ steps.prep.outputs.result }}
-          ISSUE: ${{ needs.build.outputs.feedback-pr }}
+          ISSUE: ${{ needs.grade.outputs.feedback-pr }}
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
