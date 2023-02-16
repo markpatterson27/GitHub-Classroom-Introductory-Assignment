@@ -467,7 +467,7 @@ jobs:
       # read template file and replace tokens. token replacement based on env name.
       - name: prepare comment and substitute tokens
         id: prep
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         env:
           points: ${{ needs.grade.outputs.grading-score }}
           template: ${{ steps.mto.outputs.body }}
