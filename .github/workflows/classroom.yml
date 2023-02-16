@@ -37,7 +37,7 @@ jobs:
 
       # find PR if it exists
       - name: Find PR number
-        uses: markpatterson27/find-pull-request-action@pre-pr-release
+        uses: markpatterson27/find-pull-request-action@pre-pr-release-v1.8.0
         id: check-pr
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -45,7 +45,7 @@ jobs:
           base: feedback
           branch: ${{ steps.default-branch-name.outputs.result }}
           state: all
-      - run: echo ${{ steps.check-pr.outputs.number }}
+      - run: echo "Feedback PR number - ${{ steps.check-pr.outputs.number }}"
 
       # re-open PR if closed
       - name: Reopen PR
