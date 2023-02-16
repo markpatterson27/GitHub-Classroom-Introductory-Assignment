@@ -488,7 +488,7 @@ jobs:
 
       # hide old feedback comments
       - name: hide old feedback comments
-        uses: kanga333/comment-hider@master
+        uses: kanga333/comment-hider@v0.4.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           issue_number: ${{ needs.grade.outputs.feedback-pr }}
