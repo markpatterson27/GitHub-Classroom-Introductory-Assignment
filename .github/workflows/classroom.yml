@@ -50,12 +50,15 @@ jobs:
       # re-open PR if closed
       - name: Reopen PR
         if: ${{ steps.check-pr.outputs.state == 'closed' }}
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         env:
             PR_NUMBER: ${{ steps.check-pr.outputs.number }}
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
+            summary = core.summary
+            summary.addHeading(`Reopen PR`, 3)
+            summary.addRaw(`Found Feedback PR (${process.env.PR_NUMBER}) closed. Attempting to reopen... `)
             try {
               await github.rest.pulls.update({
                 owner: context.repo.owner,
@@ -63,9 +66,12 @@ jobs:
                 pull_number: process.env.PR_NUMBER,
                 state: 'open'
               });
+              summary.addRaw(`Success. PR reopened.`)
             } catch(err) {
               console.log("Error reopening PR. (Merged PRs can't be reopened).");
-            }
+              summary.addRaw(`Error reopening PR. (Merged PRs can't be reopened).`)
+            }    
+            await summary.write()
 
       # delete and recreate result dir
       - name: Reset results dir
