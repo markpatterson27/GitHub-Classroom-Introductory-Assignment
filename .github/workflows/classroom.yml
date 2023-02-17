@@ -91,37 +91,14 @@ jobs:
           result-encoding: string
       
       # test activity 2
-      - uses: actions/github-script@v4
+      - uses: actions/github-script@v6
         name: "Check Activity 2"
         id: activity2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            // get commits, filtered by actor
-            const res = await github.repos.listCommits({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              author: context.actor,
-            });
-            let commitList = res.data
-            console.log(commitList)
-
-            // is commit list non-zero
-            if (Array.isArray(commitList) && commitList.length) {
-              console.log("commits found")
-
-              // write result to file
-              const fs = require('fs');
-              fs.writeFile('.github/results/activity2.txt', 'pass', function (err) {
-                if (err) return console.log(err);
-              });
-
-              return 'success'
-            }
-            else {
-              console.log(`no commits for ${context.actor} found`)
-              return 'fail'
-            }
+            const script = require('./.github/grading-scripts/activity2.js');
+            return await script({github, context, core});
           result-encoding: string
 
       # test activity 3
