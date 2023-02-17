@@ -102,7 +102,7 @@ jobs:
           result-encoding: string
 
       # test activity 3
-      - uses: actions/github-script@v4
+      - uses: actions/github-script@v6
         name: "Check Activity 3"
         id: activity3
         if: ${{ steps.check-pr.outputs.number }}
@@ -111,31 +111,8 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            // get comments on Feedback PR
-            const res = await github.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: process.env.ISSUE,
-            });
-            let commentList = res.data
-            console.log(commentList)
-
-            // is comment list non-zero AND does actor equal one of comment authors
-            if (Array.isArray(commentList) && commentList.length && commentList.some(comment => comment.user.login == context.actor)) {
-              console.log("comments found")
-
-              // write result to file
-              const fs = require('fs');
-              fs.writeFile('.github/results/activity3.txt', 'pass', function (err) {
-                if (err) return console.log(err);
-              });
-
-              return 'success'
-            }
-            else {
-              console.log(`no comments for ${context.author} found`)
-              return 'fail'
-            }
+            const script = require('./.github/grading-scripts/activity3.js');
+            return await script({github, context, core});
           result-encoding: string
 
       - run: ls .github/results
