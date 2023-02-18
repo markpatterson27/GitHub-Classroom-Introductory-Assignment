@@ -22,6 +22,8 @@ jobs:
     if: ${{ !(github.event_name == 'issue_comment') || contains(github.event.repository.name, github.actor) }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       # pause to wait for classroom bot to setup feedback PR
       - if: ${{ github.actor == 'github-classroom[bot]' }}
@@ -117,6 +119,17 @@ jobs:
 
       - run: ls .github/results
 
+      # get quiz score
+      - name: Calculate quiz score
+        id: quiz-score
+        run: |
+          if [[ $(git log remotes/origin/feedback..main quiz.md) ]]; then
+            echo "quiz.md file changed"
+            /bin/bash .github/grading-scripts/quiz.sh || echo "quiz_score=0" >> $GITHUB_OUTPUT
+          else
+            echo "quiz.md file not changed"
+          fi
+
       # run grading
       # add id to step so outputs can be referenced
       - uses: education/autograding@v1
@@ -136,6 +149,8 @@ jobs:
       activity1-result: ${{ steps.activity1.outputs.result }}
       activity2-result: ${{ steps.activity2.outputs.result }}
       activity3-result: ${{ steps.activity3.outputs.result }}
+      quiz-score: ${{ steps.quiz-score.outputs.quiz_score }}
+      quiz-incorrect-answers: ${{ steps.quiz-score.outputs.incorrect_answers }}
       default-branch-name: ${{ steps.default-branch-name.outputs.result }}
       feedback-pr: ${{ steps.check-pr.outputs.number }}
 
@@ -150,17 +165,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      # get quiz score
-      - name: Calculate quiz score
-        id: quiz-score
-        run: |
-          if [[ $(git log remotes/origin/feedback..main quiz.md) ]]; then
-            echo "quiz.md file changed"
-            /bin/bash .github/grading-scripts/quiz.sh || echo "quiz_score=0" >> $GITHUB_OUTPUT
-          else
-            echo "quiz.md file not changed"
-          fi
 
       # switch to status branch
       - run: git checkout status || git checkout -b status
@@ -202,8 +206,8 @@ jobs:
       # make/copy quiz icon
       - name: quiz icon
         run: |
-          if [[ ! -z "${{ steps.quiz-score.outputs.quiz_score }}" ]]; then
-            score=${{ steps.quiz-score.outputs.quiz_score }}
+          if [[ ! -z "${{ needs.grade.outputs.quiz-score }}" ]]; then
+            score=${{ needs.grade.outputs.quiz-score }}
             echo $score
 
             if [[ $score == 5 ]]; then
@@ -294,17 +298,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # get quiz score
-      - name: Calculate quiz score
-        id: quiz-score
-        run: |
-          if [[ $(git log remotes/origin/feedback..main quiz.md) ]]; then
-            echo "quiz.md file changed"
-            /bin/bash .github/grading-scripts/quiz.sh || echo "quiz_score=0" >> $GITHUB_OUTPUT
-          else
-            echo "quiz.md file not changed"
-          fi
-
       # set env var
       - name: Set additional environment variables
         run: |
@@ -360,8 +353,8 @@ jobs:
       - name: quiz feedback
         run: |
           if [[ $(git log remotes/origin/feedback..main quiz.md) ]]; then
-            score=${{ steps.quiz-score.outputs.quiz_score }}
-            incorrect=(${{ steps.quiz-score.outputs.incorrect_answers }})
+            score=${{ needs.grade.outputs.quiz-score }}
+            incorrect=(${{ needs.grade.outputs.quiz-incorrect-answers }})
             message=""
 
             if [[ $score == 5 ]]; then
