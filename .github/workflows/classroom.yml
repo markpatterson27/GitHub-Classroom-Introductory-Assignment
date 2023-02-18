@@ -124,13 +124,7 @@ jobs:
         id: quiz-score
         env:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-        run: |
-          if [[ $(git log remotes/origin/feedback..$DEFAULT_BRANCH quiz.md) ]]; then
-            echo "quiz.md file changed"
-            /bin/bash .github/grading-scripts/quiz.sh || echo "quiz_score=0" >> $GITHUB_OUTPUT
-          else
-            echo "quiz.md file not changed"
-          fi
+        run: /bin/bash .github/grading-scripts/quiz.sh || echo "quiz_score=0" >> $GITHUB_OUTPUT
 
       # run grading
       # add id to step so outputs can be referenced
