@@ -19,7 +19,8 @@ jobs:
     name: Autograding
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: ${{ !(github.event_name == 'issue_comment') || contains(github.event.repository.name, github.actor) }}
+    if: ${{ !github.event.repository.is_template &&
+            (!(github.event_name == 'issue_comment') || contains(github.event.repository.name, github.actor)) }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -154,7 +155,8 @@ jobs:
   build-activity-icons:
     name: Build Activity Icons
     runs-on: ubuntu-latest
-    if: ${{ always() && (!(github.event_name == 'issue_comment') || contains(github.event.repository.name, github.actor)) }}
+    if: ${{ always() && !github.event.repository.is_template &&
+            (!(github.event_name == 'issue_comment') || contains(github.event.repository.name, github.actor)) }}
     needs: grade
     steps:
       # need to checkout whole repo
@@ -236,7 +238,7 @@ jobs:
     name: Create Feedback PR
     runs-on: ubuntu-latest
     # run even if autograding fails.
-    if: ${{ always() && needs.grade.outputs.feedback-pr == '' }}
+    if: ${{ always() && !github.event.repository.is_template && needs.grade.outputs.feedback-pr == '' }}
     needs: [grade]
     steps:
       # checkout files so can access template
