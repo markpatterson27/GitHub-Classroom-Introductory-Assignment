@@ -122,8 +122,10 @@ jobs:
       # get quiz score
       - name: Calculate quiz score
         id: quiz-score
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
-          if [[ $(git log remotes/origin/feedback..main quiz.md) ]]; then
+          if [[ $(git log remotes/origin/feedback..$DEFAULT_BRANCH quiz.md) ]]; then
             echo "quiz.md file changed"
             /bin/bash .github/grading-scripts/quiz.sh || echo "quiz_score=0" >> $GITHUB_OUTPUT
           else
@@ -351,8 +353,10 @@ jobs:
 
       # quiz feedback
       - name: quiz feedback
+        env:
+          DEFAULT_BRANCH: ${{ needs.grade.outputs.default-branch-name }}
         run: |
-          if [[ $(git log remotes/origin/feedback..main quiz.md) ]]; then
+          if [[ $(git log remotes/origin/feedback..$DEFAULT_BRANCH quiz.md) ]]; then
             score=${{ needs.grade.outputs.quiz-score }}
             incorrect=(${{ needs.grade.outputs.quiz-incorrect-answers }})
             message=""
