@@ -285,8 +285,11 @@ jobs:
   post-feedback:
     name: Post Feedback Comment
     runs-on: ubuntu-latest
-    # run even if autograding fails. only run on main branch and if pr exists.
-    if: ${{ always() && needs.grade.outputs.feedback-pr != '' && github.ref == 'refs/heads/main' && github.actor != 'github-classroom[bot]' }}
+    # run even if autograding fails. only run on default branch and if pr exists.
+    if: ${{ always() && !github.event.repository.is_template &&
+            needs.grade.outputs.feedback-pr != '' &&
+            github.ref == format('refs/heads/{0}', needs.grade.outputs.default-branch-name) &&
+            github.actor != 'github-classroom[bot]' }}
     needs: [grade]
     steps:
       # checkout files so can access template
