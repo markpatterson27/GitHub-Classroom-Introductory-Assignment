@@ -43,6 +43,6 @@ else
       echo "Question $(( $i+1 )) incorrect."
     fi
   done
-  echo "::set-output name=quiz_score::$score"
-  echo "::set-output name=incorrect_answers::$incorrect"
+  echo "quiz_score=$score" >> $GITHUB_OUTPUT
+  echo "incorrect_answers=$incorrect" >> $GITHUB_OUTPUT
 fi

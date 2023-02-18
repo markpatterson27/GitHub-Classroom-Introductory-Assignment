@@ -157,7 +157,7 @@ jobs:
         run: |
           if [[ $(git log remotes/origin/feedback..main quiz.md) ]]; then
             echo "quiz.md file changed"
-            /bin/bash .github/grading-scripts/quiz.sh || echo "::set-output name=quiz_score::0"
+            /bin/bash .github/grading-scripts/quiz.sh || echo "quiz_score=0" >> $GITHUB_OUTPUT
           else
             echo "quiz.md file not changed"
           fi
@@ -300,7 +300,7 @@ jobs:
         run: |
           if [[ $(git log remotes/origin/feedback..main quiz.md) ]]; then
             echo "quiz.md file changed"
-            /bin/bash .github/grading-scripts/quiz.sh || echo "::set-output name=quiz_score::0"
+            /bin/bash .github/grading-scripts/quiz.sh || echo "quiz_score=0" >> $GITHUB_OUTPUT
           else
             echo "quiz.md file not changed"
           fi
